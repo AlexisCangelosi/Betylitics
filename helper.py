@@ -47,6 +47,20 @@ def create_parser():
         '--output', type=str, default='fbref_data_countries.json',
         help="The JSON output file name. Default: fbref_data_countries.json"
     )
+
+    # Subcommand: get-clubs
+    get_clubs_parser = subparsers.add_parser(
+        'get-clubs',
+        help="Fetch fbref clubs data and save it as a JSON file."
+    )
+    get_clubs_parser.add_argument(
+        '--countries_file', type=str, default='fbref_data_countries.json',
+        help="The JSON file containing countries data. Default: fbref_data_countries.json"
+    )
+    get_clubs_parser.add_argument(
+        '--output', type=str, default='fbref_data_clubs.json',
+        help="The JSON output file name. Default: fbref_data_clubs.json"
+    )
     
     # Additional subcommands can be added here in the future.
     
