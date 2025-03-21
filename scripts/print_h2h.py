@@ -344,7 +344,7 @@ def head_to_head_section():
         st.stop()
     
     if not data:
-        st.write("No data")
+        st.info('No analyse done..', icon="ℹ️")
         st.stop()
 
     # Extract team stats from the scorebox
