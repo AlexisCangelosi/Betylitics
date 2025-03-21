@@ -239,7 +239,7 @@ with st.sidebar:
         else:
             st.info("Aucun match n'a été trouvé pour cette date.")
     
-    st.caption("v1.0.0-20250321.1329")
+    st.caption("v1.0.0-20250321.1852")
 
 st.image(image="assets/logo.png", width=100)
 # --- Menu principal via option_menu ---
