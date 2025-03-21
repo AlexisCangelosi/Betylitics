@@ -636,8 +636,15 @@ def head_to_head_section():
         over15_pct = over15 / len(home_matches)
         over25_pct = over25 / len(home_matches)
 
+        if home_win_pct > away_win_pct:
+            col1_bg_color = "#009933"
+            col2_bg_color = "#cc0000"
+        else:
+            col2_bg_color = "#009933"
+            col1_bg_color = "#cc0000"
+
         # Example metric display with a centered title above the metric value.
-        col0, col1, col2 = st.columns([2,8,2])
+        col1, col2,col3,col4,col5,col6,col7,col8 = st.columns([2,3,1,3,1,1,1,1])
         col1.markdown(
             f"""
             <div class="metric-container2" style="background-color: #3d85c6">
@@ -650,16 +657,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-
-        if home_win_pct > away_win_pct:
-            col1_bg_color = "#009933"
-            col2_bg_color = "#cc0000"
-        else:
-            col2_bg_color = "#009933"
-            col1_bg_color = "#cc0000"
-
-        col0, col1, col2, col3, col4 = st.columns([2,3,2,3,2])
-        col1.markdown(
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {col1_bg_color}">
                 <!-- Container with title and value in vertical alignment -->
@@ -674,7 +672,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col2.markdown(
+        col3.markdown(
             f"""
             <div class="metric-container2" style="background-color: #ff9900">
                 <!-- Container with title and value in vertical alignment -->
@@ -686,7 +684,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col3.markdown(
+        col4.markdown(
             f"""
             <div class="metric-container2" style="background-color: {col2_bg_color}">
                 <!-- Container with title and value in vertical alignment -->
@@ -701,10 +699,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-    
-
-        col0, col1, col2, col3, col4, col5 = st.columns([2,2,2,2,2,2])
-        col1.markdown(
+        col5.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -716,7 +711,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col2.markdown(
+        col6.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -728,7 +723,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col3.markdown(
+        col7.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -740,7 +735,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col4.markdown(
+        col8.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -791,9 +786,15 @@ def head_to_head_section():
         over15_pct = over15 / len(away_matches)
         over25_pct = over25 / len(away_matches)
 
+        if home_win_pct > away_win_pct:
+            col1_bg_color = "#009933"
+            col2_bg_color = "#cc0000"
+        else:
+            col2_bg_color = "#009933"
+            col1_bg_color = "#cc0000"
 
         # Example metric display with a centered title above the metric value.
-        col0, col1, col2 = st.columns([2,8,2])
+        col1, col2,col3,col4,col5,col6,col7,col8 = st.columns([2,3,1,3,1,1,1,1])
         col1.markdown(
             f"""
             <div class="metric-container2" style="background-color: #3d85c6">
@@ -806,22 +807,13 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-
-        if home_win_pct > away_win_pct:
-            col1_bg_color = "#009933"
-            col2_bg_color = "#cc0000"
-        else:
-            col2_bg_color = "#009933"
-            col1_bg_color = "#cc0000"
-
-        col0, col1, col2, col3, col4 = st.columns([2,3,2,3,2])
-        col1.markdown(
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {col1_bg_color}">
                 <!-- Container with title and value in vertical alignment -->
                 <div class="metric-info">
                     <div class="metric-title2">{home_team_name} won</div>
-                    <div class="metric-value2">{(a_home_win / len(away_matches)) * 100:.0f}%</div>
+                    <div class="metric-value2">{(a_away_win / len(away_matches)) * 100:.0f}%</div>
                 </div>
                 <div>
                     <div class="metric-sub">Goals: {a_away_goal}<br>Moy. {(a_away_goal / len(away_matches)):.2f}</div>
@@ -830,7 +822,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col2.markdown(
+        col3.markdown(
             f"""
             <div class="metric-container2" style="background-color: #ff9900">
                 <!-- Container with title and value in vertical alignment -->
@@ -842,13 +834,13 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col3.markdown(
+        col4.markdown(
             f"""
             <div class="metric-container2" style="background-color: {col2_bg_color}">
                 <!-- Container with title and value in vertical alignment -->
                 <div class="metric-info">
                     <div class="metric-title2">{away_team_name} won</div>
-                    <div class="metric-value2">{(a_away_win / len(away_matches)) * 100:.0f}%</div>
+                    <div class="metric-value2">{(a_home_win / len(away_matches)) * 100:.0f}%</div>
                 </div>
                 <div>
                     <div class="metric-sub">Goals: {a_home_goal}<br>Moy. {(a_home_goal / len(away_matches)):.2f}</div>
@@ -857,9 +849,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-    
-        col0, col1, col2, col3, col4, col5 = st.columns([2,2,2,2,2,2])
-        col1.markdown(
+        col5.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -871,7 +861,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col2.markdown(
+        col6.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -883,7 +873,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col3.markdown(
+        col7.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -895,7 +885,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col4.markdown(
+        col8.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -907,6 +897,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
+        
 
         st.caption(get_legend_html(), unsafe_allow_html=True)
         display_match_table(away_matches)
