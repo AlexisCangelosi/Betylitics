@@ -34,6 +34,20 @@ def get_clubs(country_key, league):
     # Récupère la liste des clubs pour un pays et une ligue donnée
     return data[country_key]["League"].get(league, [])
 
+def reset_json_files():
+    """
+    Supprime le contenu des fichiers JSON en les écrasant avec un objet JSON vide.
+    """
+    files = ["artifacts/fbref_h2h.json", "artifacts/fbref_stats.json"]
+    for file in files:
+        try:
+            # Ouvre le fichier en écriture et écrase son contenu avec un objet JSON vide.
+            with open(file, "w", encoding="utf-8") as f:
+                f.write("{}")
+        except Exception as e:
+            st.toast(f"Erreur lors de la réinitialisation",icon="🚨")
+    st.toast(f"Analyse réinitialisé.",icon='🔄')
+
 st.logo(image="assets/logo.png", size="large", icon_image="assets/logo.png")
 # --- Sidebar: Sélection des équipes ---
 with st.sidebar:
@@ -242,6 +256,8 @@ with st.sidebar:
     st.caption("v1.0.0-20250321.1852")
 
 st.image(image="assets/logo.png", width=100)
+if st.button("🗑️ Reset"):
+    reset_json_files()
 # --- Menu principal via option_menu ---
 selected_main = option_menu(
     menu_title=None,

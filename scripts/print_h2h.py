@@ -68,7 +68,6 @@ def parse_scorebox_list(team_list):
                 stats[key] = int(value) if isinstance(value, str) and value.isdigit() else value
     return stats
 
-
 def extract_match_teams(report_url: str, scorebox_home: str, scorebox_away: str):
     """
     Extracts team names from the match report URL based on tokens before the date token.
@@ -120,7 +119,6 @@ def extract_match_teams(report_url: str, scorebox_home: str, scorebox_away: str)
 
     return best_split
 
-
 def is_home_match(match: dict, scorebox_home: str, scorebox_away: str) -> bool:
     """
     Determines if the match is a home match for the team corresponding to scorebox_home.
@@ -142,7 +140,6 @@ def is_home_match(match: dict, scorebox_home: str, scorebox_away: str) -> bool:
         return normalize_team_name(scorebox_home) in normalize_team_name(extracted_home)
     return False
 
-
 def is_away_match(match: dict, scorebox_home: str, scorebox_away: str) -> bool:
     """
     Determines if the match is an away match for the team corresponding to scorebox_home.
@@ -163,7 +160,6 @@ def is_away_match(match: dict, scorebox_home: str, scorebox_away: str) -> bool:
         return normalize_team_name(scorebox_home) not in normalize_team_name(extracted_home)
     return False
 
-
 def parse_score(score_str: str):
     """
     Parse a score string (e.g., "1–0" or "1-0") and return a tuple (home_score, away_score).
@@ -181,7 +177,6 @@ def parse_score(score_str: str):
         return int(parts[0].strip()), int(parts[1].strip())
     except Exception:
         return None, None
-
 
 def get_legend_html() -> str:
     """
@@ -218,7 +213,6 @@ def get_legend_html() -> str:
     </div>
 
     """
-
 
 def display_match_table(match_list: list):
     """
@@ -913,11 +907,9 @@ def head_to_head_section():
         st.caption(get_legend_html(), unsafe_allow_html=True)
         display_match_table(away_matches)
 
-
 def main():
     st.title("Head to Head Analysis")
     head_to_head_section()
-
 
 if __name__ == "__main__":
     main()
