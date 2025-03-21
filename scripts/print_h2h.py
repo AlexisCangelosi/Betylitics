@@ -458,6 +458,7 @@ def head_to_head_section():
         /* Title styling */
         .metric-title2 {
             font-size: 13px;
+            font-weight: bold;
             color: white;
             margin-bottom: 2px; /* Spacing between title and value */
         }
@@ -467,7 +468,7 @@ def head_to_head_section():
             color: white;
         }
         .metric-value2 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             color: white;
         }
@@ -476,7 +477,7 @@ def head_to_head_section():
             color: red;
         }
         .metric-sub {
-            font-size: 12px;
+            font-size: 14px;
             color: white;
         }
         </style>
@@ -493,8 +494,8 @@ def head_to_head_section():
             col1_bg_color = "#cc0000"
 
         # Example metric display with a centered title above the metric value.
-        col1, col2,col3,col4,col5,col6,col7,col8 = st.columns([2,3,1,3,1,1,1,1])
-        col1.markdown(
+        col1, col2, col3 = st.columns([5,2,5])
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: #3d85c6">
                 <!-- Container with title and value in vertical alignment -->
@@ -506,6 +507,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
+        col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
         col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {col1_bg_color}">
@@ -515,7 +517,7 @@ def head_to_head_section():
                     <div class="metric-value2">{home_win_pct * 100:.0f}%</div>
                 </div>
                 <div>
-                    <div class="metric-sub">Goals: {home_goal}<br>Moy. {(home_goal / len(matches)):.2f}</div>
+                    <div class="metric-sub">⚽ Scored: {home_goal}<br>📈 Avg: {(home_goal / len(matches)):.2f}</div>
                 </div>
             </div>
             """,
@@ -542,13 +544,14 @@ def head_to_head_section():
                     <div class="metric-value2">{away_win_pct * 100:.0f}%</div>
                 </div>
                 <div>
-                    <div class="metric-sub">Goals: {away_goal}<br>Moy. {(away_goal / len(matches)):.2f}</div>
+                    <div class="metric-sub">⚽ Scored: {away_goal}<br>📈 Avg: {(away_goal / len(matches)):.2f}</div>
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
-        col5.markdown(
+        col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -560,7 +563,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col6.markdown(
+        col3.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -572,7 +575,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col7.markdown(
+        col4.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -584,7 +587,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col8.markdown(
+        col5.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -644,8 +647,8 @@ def head_to_head_section():
             col1_bg_color = "#cc0000"
 
         # Example metric display with a centered title above the metric value.
-        col1, col2,col3,col4,col5,col6,col7,col8 = st.columns([2,3,1,3,1,1,1,1])
-        col1.markdown(
+        col1, col2, col3 = st.columns([5,2,5])
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: #3d85c6">
                 <!-- Container with title and value in vertical alignment -->
@@ -657,6 +660,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
+        col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
         col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {col1_bg_color}">
@@ -699,7 +703,8 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col5.markdown(
+        col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -711,7 +716,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col6.markdown(
+        col3.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -723,7 +728,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col7.markdown(
+        col4.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -735,7 +740,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col8.markdown(
+        col5.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -794,8 +799,8 @@ def head_to_head_section():
             col1_bg_color = "#cc0000"
 
         # Example metric display with a centered title above the metric value.
-        col1, col2,col3,col4,col5,col6,col7,col8 = st.columns([2,3,1,3,1,1,1,1])
-        col1.markdown(
+        col1, col2, col3 = st.columns([5,2,5])
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: #3d85c6">
                 <!-- Container with title and value in vertical alignment -->
@@ -807,6 +812,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
+        col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
         col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {col1_bg_color}">
@@ -849,7 +855,8 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col5.markdown(
+        col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
+        col2.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -861,7 +868,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col6.markdown(
+        col3.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -873,7 +880,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col7.markdown(
+        col4.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
@@ -885,7 +892,7 @@ def head_to_head_section():
             """,
             unsafe_allow_html=True
         )
-        col8.markdown(
+        col5.markdown(
             f"""
             <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
                 <!-- Container with title and value in vertical alignment -->
