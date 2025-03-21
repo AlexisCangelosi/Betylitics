@@ -1,3 +1,4 @@
 # .gitignore
 # This line tells Git to ignore the file named "fbref_stats.json"
-fbref_stats.json
+artifacts/fbref_stats.json
+artifacts/fbref_h2h.json

@@ -342,6 +342,10 @@ def head_to_head_section():
     except Exception as e:
         st.error(f"Unable to load fbref_h2h.json: {e}")
         st.stop()
+    
+    if not data:
+        st.write("No data")
+        st.stop()
 
     # Extract team stats from the scorebox
     scorebox = data.get("scorebox", {})
