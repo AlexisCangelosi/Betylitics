@@ -361,6 +361,7 @@ def head_to_head_section():
     # Retrieve match history
     games_info = data.get("games_history_all", {})
     matches = games_info.get("rows", [])
+    filtered_matches = [m for m in matches if m.get("Score", "").strip() != ""]
 
     # Création de deux colonnes
     col1, col2,col3 = st.columns([3,6,3])
@@ -377,9 +378,12 @@ def head_to_head_section():
 
     # Filtrage de la liste des matches en fonction de la sélection
     if selection == "Last 6":
-        matches = matches[:6]  # Prend les 6 premiers matches
+        filtered_matches = [m for m in matches if m.get("Score", "").strip() != ""]
+        matches = filtered_matches[:6]
     elif selection == "Last 10":
-        matches = matches[:10]
+        filtered_matches = [m for m in matches if m.get("Score", "").strip() != ""]
+        matches = filtered_matches[:10]
+
 
     # Extract win/draw/loss statistics from home stats (keys might be in French)
     home_win = 0
@@ -391,7 +395,7 @@ def head_to_head_section():
     btts = 0
     over15 = 0
     over25 = 0
-    for m in matches:
+    for m in filtered_matches:
         home_score, away_score = parse_score(m.get("Score", ""))
         if home_score is None or away_score is None:
             continue
@@ -423,7 +427,7 @@ def head_to_head_section():
             else:
                 draw += 1
 
-    total_games = len(matches)
+    total_games = len(filtered_matches)
     home_win_pct = home_win / total_games
     draw_pct = draw / total_games
     away_win_pct = away_win / total_games
@@ -501,7 +505,7 @@ def head_to_head_section():
                 <!-- Container with title and value in vertical alignment -->
                 <div class="metric-info">
                     <div class="metric-title2">Matches played</div>
-                    <div class="metric-value2">{len(matches)}</div>
+                    <div class="metric-value2">{len(filtered_matches)}</div>
                 </div>
             </div>
             """,

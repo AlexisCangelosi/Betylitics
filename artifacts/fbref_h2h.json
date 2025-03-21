@@ -1,1 +1,106 @@
-{}
+{
+    "h2h_url": "https://fbref.com/fr/stathead/matchup/teams/d9fac124/78ecf4bb/Historique-Burgos-contre-Almeria",
+    "scorebox": {
+        "home_team": [
+            "Burgos",
+            {
+                "victoires": "0"
+            },
+            {
+                "matchs nuls": "0"
+            },
+            {
+                "défaites": "3"
+            },
+            {
+                "buts": "0"
+            }
+        ],
+        "away_team": [
+            "Almería",
+            {
+                "victoires": "3"
+            },
+            {
+                "matchs nuls": "0"
+            },
+            {
+                "défaites": "0"
+            },
+            {
+                "buts": "6"
+            }
+        ]
+    },
+    "games_history_all": {
+        "header": [
+            "Comp",
+            "Tour",
+            "Jour",
+            "Date",
+            "Heure",
+            "Domicile",
+            "Score",
+            "Extérieur",
+            "Affluence",
+            "Tribune",
+            "Arbitre",
+            "Rapport de match",
+            "Notes"
+        ],
+        "rows": [
+            {
+                "Comp": "La Liga 2",
+                "Tour": "Segunda División",
+                "Jour": "Ven",
+                "Date": "2025-03-21",
+                "Heure": "20:30",
+                "Domicile": "Burgos",
+                "Extérieur": "Almería",
+                "Tribune": "Estadio Municipal de El Plantío"
+            },
+            {
+                "Comp": "La Liga 2",
+                "Tour": "Segunda División",
+                "Jour": "Sam",
+                "Date": "2024-10-05",
+                "Heure": "18:30",
+                "Domicile": "Almería",
+                "Score": "2–0",
+                "Extérieur": "Burgos",
+                "Affluence": "10,391",
+                "Tribune": "Power Horse Stadium",
+                "Arbitre": "Andrés Fuentes",
+                "Rapport de match": "https://fbref.com/fr/matchs/059e0723/Almeria-Burgos-5-Octobre-2024-Segunda-Division"
+            },
+            {
+                "Comp": "La Liga 2",
+                "Tour": "Segunda División",
+                "Jour": "Sam",
+                "Date": "2022-04-30",
+                "Heure": "20:30",
+                "Domicile": "Burgos",
+                "Score": "0–2",
+                "Extérieur": "Almería",
+                "Affluence": "8,479",
+                "Tribune": "Estadio Municipal de El Plantío",
+                "Arbitre": "Juan Pulido",
+                "Rapport de match": "https://fbref.com/fr/matchs/0b7ccc84/Burgos-Almeria-30-Avril-2022-Segunda-Division"
+            },
+            {
+                "Comp": "La Liga 2",
+                "Tour": "Segunda División",
+                "Jour": "Dim",
+                "Date": "2021-11-07",
+                "Heure": "18:15",
+                "Domicile": "Almería",
+                "Score": "2–0",
+                "Extérieur": "Burgos",
+                "Affluence": "9,513",
+                "Tribune": "Estadio de los Juegos Mediterráneos",
+                "Arbitre": "Aitor Gorostegui",
+                "Rapport de match": "https://fbref.com/fr/matchs/cbf9495f/Almeria-Burgos-7-Novembre-2021-Segunda-Division"
+            }
+        ]
+    }
+}

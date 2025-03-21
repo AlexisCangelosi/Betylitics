@@ -2,5 +2,5 @@
 # This line tells Git to ignore the file named "fbref_stats.json"
 artifacts/fbref_stats*
 artifacts/fbref_h2h*
-#artifacts/fbref_matches*
+artifacts/fbref_matches*
 *.pyc
