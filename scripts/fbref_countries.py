@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from colorama import Fore, Style  # For colored terminal output
 
-def fetch_fbref_countries(url='https://fbref.com/fr/equipes/', output_file='fbref_data_countries.json'):
+def fetch_fbref_countries(url='https://fbref.com/fr/equipes/', output_file='artifacts/fbref_data_countries.json'):
     """
     Fetches table data from the fbref website, processes it to extract the first 4 columns and URLs,
     then saves the data as a JSON file.

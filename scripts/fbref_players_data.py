@@ -1,73 +1,126 @@
+"""
+FBref Stats Fetcher with Optimized Request Delays
+
+This script fetches FBref statistics using a delay (random between 3 and 5 seconds)
+between each HTTP request to avoid receiving 429 responses.
+It enriches each player's data and displays a progress bar in Streamlit.
+"""
+
 import argparse
 import sys
 import json
 import requests
 from bs4 import BeautifulSoup
 import urllib.parse
+import pandas as pd
 import re
 import time
-from collections import OrderedDict
-from tqdm import tqdm  # Progress bar en console
+import certifi
+from collections import OrderedDict  # To maintain key order
+import random
+import string
 
-# Base URL pour compléter les URLs relatives, si nécessaire.
+# Base URL for completing relative URLs if needed.
 BASE_URL = "https://fbref.com"
 
-# Création d'une session globale avec un User-Agent personnalisé
+# Generate a unique 6-character ID for this script execution
+SCRIPT_ID = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+# Attempt to import Streamlit. If not available, use None.
+try:
+    import streamlit as st
+except ImportError:
+    st = None
+
+# ANSI color codes
+GREEN = "\033[92m"    # green: task executed successfully
+ORANGE = "\033[93m"   # orange: task in progress
+RED = "\033[91m"      # red: error in task
+BLUE = "\033[94m"     # blue: transitional task
+RESET = "\033[0m"
+
+# Logging functions including the unique script ID
+def print_success(message):
+    print(f"{GREEN}[{SCRIPT_ID}][SUCCESS] {message}{RESET}")
+
+def print_warning(message):
+    print(f"{ORANGE}[{SCRIPT_ID}][WARNING] {message}{RESET}")
+
+def print_error(message):
+    print(f"{RED}[{SCRIPT_ID}][ERROR] {message}{RESET}")
+
+def print_info(message):
+    print(f"{BLUE}[{SCRIPT_ID}][INFO] {message}{RESET}")
+
+# Create a global session with a custom User-Agent and common headers.
 session = requests.Session()
 session.headers.update({
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/90.0.4430.93 Safari/537.36"
-    )
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5"
 })
 
-def safe_get(url, retries=5, initial_delay=5):
+def safe_get(url, retries=3, initial_delay=5):
     """
-    Effectue un GET en appliquant un backoff exponentiel en cas de code 429.
-    Retourne le response si le code HTTP est 200, sinon lève une exception.
+    Performs a GET request directly (without proxy) with a delay between each request.
+    If a 429 status is received, the request is retried with exponential backoff.
     """
     delay = initial_delay
     for attempt in range(1, retries + 1):
         try:
-            response = session.get(url)
+            print_info(f"Requesting {url} (Attempt {attempt}/{retries})")
+            response = session.get(url, timeout=10, verify=certifi.where())
             if response.status_code == 429:
-                print(f"[WARNING] 429 pour {url}. Attente de {delay} s (tentative {attempt}/{retries}).")
-                time.sleep(delay)
-                delay *= 2
+                retry_after = int(response.headers.get("Retry-After", 5))
+                print_warning(f"Received 429 for {url}. Waiting {retry_after} seconds before retrying.")
+                time.sleep(retry_after)
                 continue
             response.raise_for_status()
+            print_success(f"Successfully fetched {url}")
+
+            # Affichage du spinner avec la durée du sleep
+            sleep_time = random.uniform(2, 5)
+            if st:
+                with st.spinner(f"Update ...", show_time=True):
+                    time.sleep(sleep_time)
+            else:
+                time.sleep(sleep_time)
+
             return response
         except Exception as e:
             if attempt == retries:
-                print(f"[ERROR] Echec après {retries} tentatives pour {url}: {e}")
+                print_error(f"Failed after {retries} attempts for {url}: {e}")
                 raise e
             else:
-                print(f"[WARNING] Erreur lors de l'accès à {url}: {e}. Nouvelle tentative dans {delay} s (tentative {attempt}/{retries}).")
+                print_warning(f"Error accessing {url}: {e}. Retrying in {delay} seconds (Attempt {attempt}/{retries}).")
                 time.sleep(delay)
                 delay *= 2
     return None
 
 def read_json(filename):
-    """Lit un fichier JSON et retourne les données."""
+    """Reads a JSON file and returns the data."""
     with open(filename, "r", encoding="utf-8") as f:
         return json.load(f)
 
 def write_json(data, filename):
-    """Écrit les données dans un fichier JSON."""
+    """Writes data to a JSON file."""
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
-    print(f"JSON file '{filename}' updated.")
+    print_success(f"JSON file '{filename}' updated.")
 
 def parse_table(table):
     """
-    Analyse une table avec un header à deux niveaux.
-    Retourne un dictionnaire contenant :
-      - "header": {"data_tip": {nom_du_subheader: liste de valeurs formatées, ...}}
-      - "rows": une liste d'OrderedDict respectant l'ordre des colonnes.
+    Parses a table with a two-level header.
+    Returns a dictionary with:
+      - "header": {"data_tip": {subheader_name: list of formatted values, ...}}
+      - "rows": a list of OrderedDict preserving the column order.
     
-    Pour la colonne "Joueur", si un lien est présent, l'URL du joueur est extraite
-    (complétée avec BASE_URL si nécessaire) et insérée en première position sous la clé "Joueur URL".
+    For the "Joueur" column, if a link is present, the player's URL is extracted
+    (completed with BASE_URL if necessary) and inserted as "Joueur URL".
     """
     thead = table.find("thead")
     sub_tip = {}
@@ -122,22 +175,19 @@ def parse_table(table):
 
 def get_player_additional_info(player_url):
     """
-    Pour une URL de joueur, récupère la page du joueur et extrait :
-      - L'URL de la photo (dans div#info > div.media-item img)
-      - Tout le texte des balises <p> dans div#info
-      - Le palmarès (contenu dans <ul id="bling">)
-      - La table scout_summary_* (si présente)
-      - La table last_5_matchlogs (si présente)
-    
-    Retourne un dictionnaire avec ces informations.
+    For a player's URL, retrieves the page and extracts:
+      - The player's photo URL
+      - Additional text from <p> tags
+      - Honors list
+      - Scout summary table
+      - Last 5 match logs table
     """
-    # Vérifier si l'URL est complète
     if not player_url.startswith("http"):
         player_url = urllib.parse.urljoin(BASE_URL, player_url)
     try:
         response = safe_get(player_url)
     except Exception as e:
-        print(f"[ERROR] Impossible de récupérer {player_url}: {e}", file=sys.stderr)
+        print_error(f"Error fetching {player_url}: {e}")
         return {}
     
     soup = BeautifulSoup(response.content, "lxml")
@@ -148,7 +198,7 @@ def get_player_additional_info(player_url):
     
     additional_info = {}
     
-    # 1. Photo URL
+    # 1. Photo URL extraction
     meta_div = info_div.find("div", id="meta")
     photo_url = ""
     if meta_div:
@@ -159,11 +209,11 @@ def get_player_additional_info(player_url):
                 photo_url = img["src"]
     additional_info["photo_url"] = photo_url
     
-    # 2. Texte complémentaire (tous les <p> de div#info)
+    # 2. Additional text (all <p> tags within div#info)
     p_tags = info_div.find_all("p")
     additional_info["info"] = [p.get_text(strip=True) for p in p_tags if p.get_text(strip=True)]
     
-    # 3. Palmares depuis <ul id="bling">
+    # 3. Honors list from <ul id="bling">
     palmares = []
     bling_ul = info_div.find("ul", id="bling")
     if bling_ul:
@@ -174,14 +224,14 @@ def get_player_additional_info(player_url):
             palmares.append(item)
     additional_info["palmares"] = palmares
     
-    # 4. Table scout_summary_*
+    # 4. Scout summary table
     scout_summary_table = soup.find("table", id=lambda x: x and x.startswith("scout_summary_"))
     if scout_summary_table:
         additional_info["scout_summary"] = parse_table(scout_summary_table)
     else:
         additional_info["scout_summary"] = {}
     
-    # 5. Table last_5_matchlogs
+    # 5. Last 5 match logs table
     last_5_table = soup.find("table", id="last_5_matchlogs")
     if last_5_table:
         additional_info["last_5_matchlogs"] = parse_table(last_5_table)
@@ -192,49 +242,65 @@ def get_player_additional_info(player_url):
 
 def process_players_data(data):
     """
-    Parcourt chaque dataset, chaque table et chaque joueur dans le JSON.
-    Pour chaque joueur, récupère l'URL (clé "Joueur URL") et scrappe les informations complémentaires.
-    Les données récupérées sont ajoutées dans le sous-élément "additional_info" du joueur.
-    Une barre de progression (tqdm) suit le traitement des joueurs.
+    Iterates through each dataset, table, and player in the JSON.
+    For each player, retrieves additional info from their URL and stores it under "additional_info".
+    The progress bar is updated in Streamlit if available.
     """
     total_players = 0
-    # Comptabilisation du nombre total de joueurs à traiter
     for dataset in data.get("datasets", []):
         for table in dataset.get("tables", []):
             total_players += len(table.get("rows", []))
     
-    pbar = tqdm(total=total_players, desc="Mise à jour des joueurs", unit="joueur")
+    # Création de la progress bar Streamlit si disponible
+    progress_bar = st.progress(0, text="Updating players...") if st else None
+    current_count = 0
     
     for dataset in data.get("datasets", []):
         for table in dataset.get("tables", []):
             for row in table.get("rows", []):
                 player_url = row.get("Joueur URL", "").strip()
+                player_name = row.get("Joueur")
+                # Petit délai supplémentaire aléatoire (0 à 2s) entre chaque joueur
+                wait = random.uniform(0, 2)
+
                 if player_url:
-                    # Récupère les infos complémentaires avec safe_get et update progressif
                     additional_info = get_player_additional_info(player_url)
                     row["additional_info"] = additional_info
-                    time.sleep(0.3)  # Pause courte pour limiter les requêtes
-                pbar.update(1)
-    pbar.close()
+
+                    # Spinner qui affiche la durée de ce petit délai
+                    if st:
+                        with st.spinner(f"Wait for next player...", show_time=True):
+                            time.sleep(wait)
+                    else:
+                        time.sleep(wait)
+
+                current_count += 1
+                if progress_bar:
+                    progress = int((current_count / total_players) * 100)
+                    progress_bar.progress(
+                        progress, 
+                        text=f"Updating: {player_name} ... ({progress}% - {current_count}/{total_players})"
+                    )
+                    
+    if progress_bar:
+        progress_bar.empty()
     return data
 
-def update_fbref_players_data(json_file="fbref_stats.json"):
+def update_fbref_players_data(json_file="artifacts/fbref_stats.json"):
     """
-    Lit le fichier JSON (json_file), enrichit les données de chaque joueur en récupérant
-    les informations complémentaires depuis sa page FBref et met à jour le même fichier.
-    
-    Retourne les données mises à jour.
+    Reads the JSON file, enriches each player's data by scraping their FBref page for additional info,
+    and then updates the same file.
+    Returns the updated data.
     """
     data = read_json(json_file)
     data = process_players_data(data)
     write_json(data, json_file)
     return data
 
-# Permet d'appeler la fonction depuis la ligne de commande ou de l'importer dans un autre script
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Enrichit le JSON fbref_stats avec des informations supplémentaires pour chaque joueur."
+        description="Enrich the fbref_stats JSON with additional information for each player."
     )
-    parser.add_argument("--file", default="fbref_stats.json", help="Chemin vers le fichier JSON à mettre à jour")
+    parser.add_argument("--file", default="artifacts/bref_stats.json", help="Path to the JSON file to update")
     args = parser.parse_args()
     update_fbref_players_data(args.file)

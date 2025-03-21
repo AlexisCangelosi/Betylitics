@@ -1,0 +1,301 @@
+{
+    "h2h_url": "https://fbref.com/fr/stathead/matchup/teams/4ba7cbea/18bb7c10/Historique-Bournemouth-contre-Arsenal",
+    "scorebox": {
+        "home_team": [
+            "Bournemouth",
+            {
+                "victoires": "2"
+            },
+            {
+                "matchs nuls": "2"
+            },
+            {
+                "défaites": "12"
+            },
+            {
+                "buts": "14"
+            }
+        ],
+        "away_team": [
+            "Arsenal",
+            {
+                "victoires": "12"
+            },
+            {
+                "matchs nuls": "2"
+            },
+            {
+                "défaites": "2"
+            },
+            {
+                "buts": "38"
+            }
+        ]
+    },
+    "games_history_all": {
+        "header": [
+            "Comp",
+            "Tour",
+            "Jour",
+            "Date",
+            "Heure",
+            "Domicile",
+            "xG",
+            "Score",
+            "xG",
+            "Extérieur",
+            "Affluence",
+            "Tribune",
+            "Arbitre",
+            "Rapport de match",
+            "Notes"
+        ],
+        "rows": [
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Sam",
+                "Date": "2025-05-03",
+                "Heure": "15:00",
+                "Domicile": "Arsenal",
+                "Extérieur": "Bournemouth",
+                "Tribune": "Emirates Stadium"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Sam",
+                "Date": "2024-10-19",
+                "Heure": "17:30",
+                "Domicile": "Bournemouth",
+                "xG": "0.7",
+                "Score": "2–0",
+                "Extérieur": "Arsenal",
+                "Affluence": "11,235",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Robert Jones",
+                "Rapport de match": "https://fbref.com/fr/matchs/01e63a1f/Bournemouth-Arsenal-19-Octobre-2024-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Sam",
+                "Date": "2024-05-04",
+                "Heure": "12:30",
+                "Domicile": "Arsenal",
+                "xG": "0.5",
+                "Score": "3–0",
+                "Extérieur": "Bournemouth",
+                "Affluence": "60,348",
+                "Tribune": "Emirates Stadium",
+                "Arbitre": "David Coote",
+                "Rapport de match": "https://fbref.com/fr/matchs/00bcfc31/Arsenal-Bournemouth-4-Mai-2024-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Sam",
+                "Date": "2023-09-30",
+                "Heure": "15:00",
+                "Domicile": "Bournemouth",
+                "xG": "3.4",
+                "Score": "0–4",
+                "Extérieur": "Arsenal",
+                "Affluence": "11,193",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Michael Salisbury",
+                "Rapport de match": "https://fbref.com/fr/matchs/8de4aca0/Bournemouth-Arsenal-30-Septembre-2023-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Sam",
+                "Date": "2023-03-04",
+                "Heure": "15:00",
+                "Domicile": "Arsenal",
+                "xG": "1.3",
+                "Score": "3–2",
+                "Extérieur": "Bournemouth",
+                "Affluence": "60,222",
+                "Tribune": "Emirates Stadium",
+                "Arbitre": "Chris Kavanagh",
+                "Rapport de match": "https://fbref.com/fr/matchs/3e9a33fc/Arsenal-Bournemouth-4-Mars-2023-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Sam",
+                "Date": "2022-08-20",
+                "Heure": "17:30",
+                "Domicile": "Bournemouth",
+                "xG": "1.3",
+                "Score": "0–3",
+                "Extérieur": "Arsenal",
+                "Affluence": "10,423",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Craig Pawson",
+                "Rapport de match": "https://fbref.com/fr/matchs/7f11dd9e/Bournemouth-Arsenal-20-Aout-2022-Premier-League"
+            },
+            {
+                "Comp": "FA Cup",
+                "Tour": "Quatrième tour",
+                "Jour": "Lun",
+                "Date": "2020-01-27",
+                "Heure": "20:00",
+                "Domicile": "Bournemouth",
+                "Score": "1–2",
+                "Extérieur": "Arsenal",
+                "Affluence": "10,308",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Martin Atkinson",
+                "Rapport de match": "https://fbref.com/fr/matchs/3a82a2bd/Bournemouth-Arsenal-27-Janvier-2020-FA-Cup"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Jeu",
+                "Date": "2019-12-26",
+                "Heure": "15:00",
+                "Domicile": "Bournemouth",
+                "xG": "1.4",
+                "Score": "1–1",
+                "Extérieur": "Arsenal",
+                "Affluence": "10,234",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Stuart Attwell",
+                "Rapport de match": "https://fbref.com/fr/matchs/5b1ecf02/Bournemouth-Arsenal-26-Decembre-2019-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Dim",
+                "Date": "2019-10-06",
+                "Heure": "14:00",
+                "Domicile": "Arsenal",
+                "xG": "0.6",
+                "Score": "1–0",
+                "Extérieur": "Bournemouth",
+                "Affluence": "60,326",
+                "Tribune": "Emirates Stadium",
+                "Arbitre": "Martin Atkinson",
+                "Rapport de match": "https://fbref.com/fr/matchs/9575566f/Arsenal-Bournemouth-6-Octobre-2019-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Mer",
+                "Date": "2019-02-27",
+                "Heure": "19:45",
+                "Domicile": "Arsenal",
+                "xG": "0.9",
+                "Score": "5–1",
+                "Extérieur": "Bournemouth",
+                "Affluence": "59,618",
+                "Tribune": "Emirates Stadium",
+                "Arbitre": "Chris Kavanagh",
+                "Rapport de match": "https://fbref.com/fr/matchs/59600e66/Arsenal-Bournemouth-27-Fevrier-2019-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Dim",
+                "Date": "2018-11-25",
+                "Heure": "13:30",
+                "Domicile": "Bournemouth",
+                "xG": "1.6",
+                "Score": "1–2",
+                "Extérieur": "Arsenal",
+                "Affluence": "10,792",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Craig Pawson",
+                "Rapport de match": "https://fbref.com/fr/matchs/753e2ff1/Bournemouth-Arsenal-25-Novembre-2018-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Dim",
+                "Date": "2018-01-14",
+                "Heure": "13:30",
+                "Domicile": "Bournemouth",
+                "xG": "1.1",
+                "Score": "2–1",
+                "Extérieur": "Arsenal",
+                "Affluence": "10,836",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Kevin Friend",
+                "Rapport de match": "https://fbref.com/fr/matchs/085a3a26/Bournemouth-Arsenal-14-Janvier-2018-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Sam",
+                "Date": "2017-09-09",
+                "Heure": "15:00",
+                "Domicile": "Arsenal",
+                "xG": "0.6",
+                "Score": "3–0",
+                "Extérieur": "Bournemouth",
+                "Affluence": "59,262",
+                "Tribune": "Emirates Stadium",
+                "Arbitre": "Anthony Taylor",
+                "Rapport de match": "https://fbref.com/fr/matchs/2fab7d59/Arsenal-Bournemouth-9-Septembre-2017-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Mar",
+                "Date": "2017-01-03",
+                "Heure": "19:45",
+                "Domicile": "Bournemouth",
+                "Score": "3–3",
+                "Extérieur": "Arsenal",
+                "Affluence": "11,202",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Michael Oliver",
+                "Rapport de match": "https://fbref.com/fr/matchs/f4a549b2/Bournemouth-Arsenal-3-Janvier-2017-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Dim",
+                "Date": "2016-11-27",
+                "Heure": "14:15",
+                "Domicile": "Arsenal",
+                "Score": "3–1",
+                "Extérieur": "Bournemouth",
+                "Affluence": "59,978",
+                "Tribune": "Emirates Stadium",
+                "Arbitre": "Mike Jones",
+                "Rapport de match": "https://fbref.com/fr/matchs/40ece6d2/Arsenal-Bournemouth-27-Novembre-2016-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Dim",
+                "Date": "2016-02-07",
+                "Heure": "13:30",
+                "Domicile": "Bournemouth",
+                "Score": "0–2",
+                "Extérieur": "Arsenal",
+                "Affluence": "11,357",
+                "Tribune": "Vitality Stadium",
+                "Arbitre": "Kevin Friend",
+                "Rapport de match": "https://fbref.com/fr/matchs/ae9065f7/Bournemouth-Arsenal-7-Fevrier-2016-Premier-League"
+            },
+            {
+                "Comp": "Premier League",
+                "Tour": "Premier League",
+                "Jour": "Lun",
+                "Date": "2015-12-28",
+                "Heure": "17:30",
+                "Domicile": "Arsenal",
+                "Score": "2–0",
+                "Extérieur": "Bournemouth",
+                "Affluence": "59,983",
+                "Tribune": "Emirates Stadium",
+                "Arbitre": "Roger East",
+                "Rapport de match": "https://fbref.com/fr/matchs/d953d0bd/Arsenal-Bournemouth-28-Decembre-2015-Premier-League"
+            }
+        ]
+    }
+}

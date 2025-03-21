@@ -150,27 +150,32 @@ def fetch_clubs_from_url(country_name, url):
     log_success(f"Found {len(clubs)} clubs for {country_name}")
     return clubs
 
-def update_clubs_json(new_clubs, output_file="fbref_data_clubs.json"):
+def update_clubs_json(new_clubs, output_file="artifacts/fbref_data_clubs.json"):
     """
-    Updates (or creates) the JSON file grouping clubs by country and then by league.
+    Met à jour (ou crée) le fichier JSON en regroupant les clubs par pays selon la structure suivante:
     
-    The JSON structure will be:
-        {
-            "Country1": {
+    {
+        "Country1": {
+            "Featured": false,
+            "Featured_league": [],
+            "League": { 
                 "League1": [ list of clubs ],
                 "League2": [ list of clubs ]
-            },
-            "Country2": { ... }
-        }
+            }
+        },
+        "Country2": { ... }
+    }
     
-    If a club (identified by its 'Club Name') is already present in the specified country and league,
-    it is not added again.
+    Si un club (identifié par son 'Club Name') est déjà présent dans le pays et la ligue correspondants,
+    il n'est pas ajouté de nouveau.
     
-    Parameters:
-        new_clubs (list): A list of tuples (country_name, club_data).
-        output_file (str): The JSON file to update.
+    Paramètres:
+        new_clubs (list): Une liste de tuples (country_name, club_data).
+        output_file (str): Le fichier JSON à mettre à jour.
     """
-    # Load existing data if file exists
+    import os, json
+    
+    # Charger les données existantes si le fichier existe
     if os.path.exists(output_file):
         try:
             with open(output_file, "r", encoding="utf-8") as f:
@@ -183,15 +188,24 @@ def update_clubs_json(new_clubs, output_file="fbref_data_clubs.json"):
     
     added_count = 0
     for country, club in new_clubs:
-        country_entry = clubs_data.get(country, {})
+        # Créer ou récupérer l'entrée pour le pays avec la nouvelle structure
+        if country in clubs_data:
+            country_entry = clubs_data[country]
+        else:
+            country_entry = {
+                "Featured": False,
+                "Featured_league": [],
+                "League": {}
+            }
         league = club.get("League", "Unknown League")
-        league_clubs = country_entry.get(league, [])
+        # Récupérer la liste des clubs pour la ligue ou la créer
+        league_clubs = country_entry["League"].get(league, [])
         
-        # Check if the club already exists in this league (by club name)
+        # Vérifier si le club existe déjà (par 'Club Name')
         exists = any(existing.get("Club Name") == club.get("Club Name") for existing in league_clubs)
         if not exists:
             league_clubs.append(club)
-            country_entry[league] = league_clubs
+            country_entry["League"][league] = league_clubs
             clubs_data[country] = country_entry
             added_count += 1
     
@@ -202,7 +216,8 @@ def update_clubs_json(new_clubs, output_file="fbref_data_clubs.json"):
     except Exception as e:
         log_error(f"Error writing to {output_file}: {e}")
 
-def fetch_fbref_clubs(countries_file="fbref_data_countries.json", output_file="fbref_data_clubs.json"):
+
+def fetch_fbref_clubs(countries_file="artifacts/fbref_data_countries.json", output_file="artifacts/fbref_data_clubs.json"):
     """
     Main function that:
       - Loads countries data from the specified JSON file.

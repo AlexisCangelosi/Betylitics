@@ -1,6 +1,6 @@
 from helper import create_parser, log_info, log_success, log_error, log_warning
-from fbref_countries import fetch_fbref_countries
-from fbref_clubs import fetch_fbref_clubs
+from scripts.fbref_countries import fetch_fbref_countries
+from scripts.fbref_clubs import fetch_fbref_clubs
 
 def main():
     # Create the command-line parser using our helper module
