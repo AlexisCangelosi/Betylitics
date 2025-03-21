@@ -138,6 +138,8 @@ with st.sidebar:
         else:
             st.markdown('<p style="color:red;">⚠️ Unable to retrieve the URLs for the selected clubs.</p>', unsafe_allow_html=True)
 
+    st.caption("v1.0.1")
+    
 st.image(image="assets/logo.png", width=100)
 # --- Menu principal via option_menu ---
 selected_main = option_menu(
