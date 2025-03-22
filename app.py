@@ -287,7 +287,25 @@ with st.sidebar:
     
     if st.button("🗑️ Reset"):
         reset_json_files()
-    st.caption("v1.0.0-20250322.a310")
+    # Assume this timestamp is when your data was last updated.
+    # For example, here we simulate it with a timestamp from one hour ago.
+    last_updated_str = "2025-03-22 02:32"  # Replace this with your actual update time
+    # For demonstration, we subtract 1 hour:
+    last_updated = datetime.strptime(last_updated_str, "%Y-%m-%d %H:%M")
+
+    # Compute the time difference
+    now = datetime.now()
+    time_diff = now - last_updated
+    hours_ago = int(time_diff.total_seconds() // 3600)
+    minutes_ago = int((time_diff.total_seconds() % 3600) // 60)
+
+    # Create a dynamic update message
+    if hours_ago > 0:
+        update_message = f"🗘 {hours_ago} hour{'s' if hours_ago > 1 else ''} ago"
+    else:
+        update_message = f"🗘 {minutes_ago} minute{'s' if minutes_ago > 1 else ''} ago"
+
+    st.caption(f"⚙️ v1.0.0-20250322.9914 - {update_message}")
 
 # --- Menu principal via option_menu ---
 datasets = infos.get("datasets", [])
