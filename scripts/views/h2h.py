@@ -4,19 +4,24 @@ import difflib
 import re
 from datetime import datetime
 import pandas as pd
+import unicodedata
 from streamlit_option_menu import option_menu
 
 
 def normalize_team_name(name: str) -> str:
     """
-    Normalize a team name by removing spaces and hyphens and converting to lowercase.
-    
+    Normalize a team name by removing accents, spaces, and hyphens,
+    and converting to lowercase.
+
     Parameters:
         name (str): The team name to normalize.
-    
+
     Returns:
         str: Normalized team name.
     """
+    # Remove accents (diacritics)
+    name = unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode('ascii')
+    # Remove spaces and hyphens, and convert to lowercase
     return re.sub(r'[\s\-]', '', name.lower())
 
 def get_closest_team_name(abbrev: str, team_names: list) -> str:
@@ -631,9 +636,8 @@ def head_to_head_section():
 
             h_home_goal += home_score
             h_away_goal += away_score
-        
-    
-        btts_pct = btts / len(home_matches)
+
+        btts_pct   = btts / len(home_matches)
         over15_pct = over15 / len(home_matches)
         over25_pct = over25 / len(home_matches)
 
