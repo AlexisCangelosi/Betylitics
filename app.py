@@ -289,7 +289,7 @@ with st.sidebar:
         reset_json_files()
     # Assume this timestamp is when your data was last updated.
     # For example, here we simulate it with a timestamp from one hour ago.
-    last_updated_str = "2025-03-22 02:42"  # Replace this with your actual update time
+    last_updated_str = "2025-03-22 02:49"  # Replace this with your actual update time
     # For demonstration, we subtract 1 hour:
     last_updated = datetime.strptime(last_updated_str, "%Y-%m-%d %H:%M")
 
@@ -305,7 +305,7 @@ with st.sidebar:
     else:
         update_message = f"🗘 {minutes_ago} minute{'s' if minutes_ago > 1 else ''} ago"
 
-    st.caption(f"⚙️ v1.0.0-20250322.c1d1 - {update_message}")
+    st.caption(f"⚙️ v1.0.0-20250322.cc18 - {update_message}")
 
 # --- Menu principal via option_menu ---
 datasets = infos.get("datasets", [])

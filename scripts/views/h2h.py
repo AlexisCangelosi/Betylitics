@@ -368,12 +368,12 @@ def head_to_head_section():
     # Dans la première colonne, on place les pills pour la sélection "All", "Home", "Away"
     with col1:
         options_team = ["All", "Home", "Away"]
-        selection2 = st.pills("View", options_team, selection_mode="single", default="All")
+        selection2 = st.pills("View", options_team, selection_mode="single", default="All", label_visibility="collapsed")
 
     # Dans la deuxième colonne, on place les pills pour la sélection du nombre de matches
     with col3:
         options_count = ["All", "Last 6", "Last 10"]
-        selection = st.pills("Match count", options_count, selection_mode="single", default="All")
+        selection = st.pills("Match count", options_count, selection_mode="single", default="All", label_visibility="collapsed")
 
     # Filtrage de la liste des matches en fonction de la sélection
     if selection == "Last 6":

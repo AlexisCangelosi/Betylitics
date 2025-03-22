@@ -119,7 +119,8 @@ def display_team_summary(datasets: list):
         options=team_names,
         selection_mode="single",
         default=team_names[0],
-        key="team_selection"
+        key="team_selection",
+        label_visibility="collapsed"
     )
     # Find the dataset corresponding to the selected team
     selected_index = team_names.index(selected_team)
@@ -320,7 +321,8 @@ def display_team_summary(datasets: list):
         options=["Default", "Wide"],
         selection_mode="single",
         default="Default",
-        key=f"display_mode"
+        key=f"display_mode",
+        label_visibility="collapsed"
     )
     if display_mode != "Wide":
         columns_to_show = ["Date", "Comp", "Tour", "Résultat", "BM", "BE", "Adversaire"]
@@ -331,6 +333,7 @@ def display_team_summary(datasets: list):
         st.dataframe(df_to_display.style.apply(highlight_result, axis=1), hide_index=True)
     else:
         st.info("No matches available after filtering.")
+
 
 def display_team_stats(team_data: dict):
     """
@@ -370,7 +373,8 @@ def display_statistics():
         options=sub_views,
         selection_mode="single",
         default=sub_views[0],
-        key="subview_selection"
+        key="subview_selection",
+        label_visibility="collapsed"
     )
 
     if selected_sub_view == "Form & Streak":
