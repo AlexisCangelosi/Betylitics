@@ -291,10 +291,9 @@ with st.sidebar:
 
 # --- Menu principal via option_menu ---
 datasets = infos.get("datasets", [])
-if not datasets:
-    st.info("No datasets found in the JSON data.")
 team_names = [extract_team_name(ds.get("team", "Unknown")) for ds in datasets]
-st.subheader(f"{team_names[0]} vs {team_names[1]}")
+if len(team_names) >= 2:
+        st.subheader(f"{team_names[0]} vs {team_names[1]}")
 
 selected_main = option_menu(
     menu_title=None,
