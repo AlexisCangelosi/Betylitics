@@ -1,6 +1,6 @@
-from helper import create_parser, log_info, log_success, log_error, log_warning
-from scripts.fbref_countries import fetch_fbref_countries
-from scripts.fbref_clubs import fetch_fbref_clubs
+from scripts.utils.helper import create_parser, log_info, log_success, log_error, log_warning
+from scripts.utils.get_countries import fetch_fbref_countries
+from scripts.utils.get_clubs import fetch_fbref_clubs
 
 def main():
     # Create the command-line parser using our helper module

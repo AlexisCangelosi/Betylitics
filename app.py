@@ -3,13 +3,15 @@ import json
 import pandas as pd
 import numpy as np
 import time
+import re
 from datetime import datetime
 from streamlit_option_menu import option_menu
-from scripts.fbref_club_data import fetch_fbref_stats
-from scripts.fbref_players_data import update_fbref_players_data
-from scripts.fbref_h2h_data import get_h2h_data
-from scripts.print_h2h import head_to_head_section
-from scripts.get_matches import get_matches
+from scripts.controler.get_team_data import fetch_fbref_stats
+from scripts.controler.get_players_data import update_fbref_players_data
+from scripts.controler.get_h2h_data import get_h2h_data
+from scripts.controler.get_matches import get_matches
+from scripts.views.h2h import head_to_head_section
+from scripts.views.statistics import display_statistics
 
 # --- Page Configuration ---
 st.set_page_config(page_title="Betylitics", layout="wide")
@@ -20,6 +22,9 @@ with open("artifacts/fbref_data_clubs.json", "r", encoding="utf-8") as f:
 
 with open("artifacts/fbref_matches.json", "r", encoding="utf-8") as f2:
     venues = json.load(f2)
+
+with open("artifacts/fbref_stats.json", "r", encoding="utf-8") as f3:
+    infos = json.load(f3)
 
 # Extraire et trier les pays : ceux avec Featured=true en premier.
 featured_countries = [country for country, details in data.items() if details.get("Featured", False)]
@@ -48,12 +53,39 @@ def reset_json_files():
             st.toast(f"Erreur lors de la réinitialisation",icon="🚨")
     st.toast(f"Analyse réinitialisé.",icon='🔄')
 
+def extract_team_name(team_str: str) -> str:
+    """
+    Extracts the team name from a full string.
+    Expected format:
+      "Statistiques YYYY-YYYY TEAM_NAME(Ligue ...)"
+    Returns the TEAM_NAME part, e.g., "Strasbourg" or "Lyon".
+    """
+    match = re.search(r"Statistiques\s+\d{4}-\d{4}\s+([^(]+)", team_str)
+    if match:
+        return match.group(1).strip()
+    # Fallback: remove the "Statistiques" prefix and anything in parentheses.
+    team_str = team_str.replace("Statistiques", "").strip()
+    if "(" in team_str:
+        team_str = team_str.split("(")[0].strip()
+    return team_str
+
+
 st.logo(image="assets/logo.png", size="large", icon_image="assets/logo.png")
 # --- Sidebar: Sélection des équipes ---
 with st.sidebar:
-    options = ["Events", "Manual"]
-    selection = st.pills("Search", options, selection_mode="multi", default="Events")
-    
+    # Create three columns with adjustable width proportions
+    col1, col2, col3 = st.columns([3, 2, 1])  # Adjust these numbers as needed for layout proportions
+
+    with col1:
+        # Options for the pills component
+        options = ["Events", "Manual"]
+        # Display the pills component (assuming st.pills is available in your version)
+        selection = st.pills("Search", options, selection_mode="multi", default="Events")
+
+    with col3:
+        # Display the image (logo) with a fixed width
+        st.image("assets/logo.png", width=100)
+
     if "Manual" in selection:
         same_settings = st.toggle("Use same league for away", value=True)
         if same_settings:
@@ -253,12 +285,17 @@ with st.sidebar:
         else:
             st.info("Aucun match n'a été trouvé pour cette date.")
     
-    st.caption("v1.0.0-20250321.1852")
+    if st.button("🗑️ Reset"):
+        reset_json_files()
+    st.caption("v1.0.0-20250322.a310")
 
-st.image(image="assets/logo.png", width=100)
-if st.button("🗑️ Reset"):
-    reset_json_files()
 # --- Menu principal via option_menu ---
+datasets = infos.get("datasets", [])
+if not datasets:
+    st.info("No datasets found in the JSON data.")
+team_names = [extract_team_name(ds.get("team", "Unknown")) for ds in datasets]
+st.subheader(f"{team_names[0]} vs {team_names[1]}")
+
 selected_main = option_menu(
     menu_title=None,
     options=["H2H", "Statistics", "Facts"],
@@ -275,52 +312,6 @@ selected_main = option_menu(
 if selected_main == "H2H":
     head_to_head_section()
 elif selected_main == "Statistics":
-    # Sous-menu horizontal (Home / Away)
-    selected_sub = option_menu(
-        menu_title=None,
-        options=["Home", "Away"],
-        icons=["house", "airplane"],
-        orientation="horizontal",
-        default_index=0,
-        styles={
-            "container": {"padding": "0px", "background-color": "rgba(0,0,0,0)"},
-            "nav-link": {"background-color": "rgba(0,0,0,0)", "font-size": "14px", "text-align": "center", "margin": "0px", "--hover-color": "rgba(255,255,255,0.1)"},
-            "nav-link-selected": {"background-color": "rgba(0,0,0,0)", "border-bottom": "3px solid green", "font-weight": "bold"},
-        },
-    )
-    if selected_sub == "Home":
-        selected_sub_sub = option_menu(
-            menu_title=None,
-            options=["Team Statistics", "Players Statistics"],
-            icons=["bar-chart-line", "people"],
-            orientation="horizontal",
-            default_index=0,
-            styles={
-                "container": {"padding": "0px", "background-color": "rgba(0,0,0,0)"},
-                "nav-link": {"background-color": "rgba(0,0,0,0)", "font-size": "14px", "text-align": "center", "margin": "0px", "--hover-color": "rgba(255,255,255,0.1)"},
-                "nav-link-selected": {"background-color": "rgba(0,0,0,0)", "border-bottom": "3px solid green", "font-weight": "bold"},
-            },
-        )
-        if selected_sub_sub == "Team Statistics":
-            st.write("Contenu relatif aux équipes (Home).")
-        else:
-            st.write("Contenu relatif aux joueurs (Home).")
-    elif selected_sub == "Away":
-        selected_sub_sub = option_menu(
-            menu_title=None,
-            options=["Team Statistics", "Players Statistics"],
-            icons=["bar-chart-line", "people"],
-            orientation="horizontal",
-            default_index=0,
-            styles={
-                "container": {"padding": "0px", "background-color": "rgba(0,0,0,0)"},
-                "nav-link": {"background-color": "rgba(0,0,0,0)", "font-size": "14px", "text-align": "center", "margin": "0px", "--hover-color": "rgba(255,255,255,0.1)"},
-                "nav-link-selected": {"background-color": "rgba(0,0,0,0)", "border-bottom": "3px solid green", "font-weight": "bold"},
-            },
-        )
-        if selected_sub_sub == "Team Statistics":
-            st.write("Contenu relatif aux équipes (Away).")
-        else:
-            st.write("Contenu relatif aux joueurs (Away).")
+    display_statistics()
 elif selected_main == "Facts":
     st.write("Autres faits et informations.")

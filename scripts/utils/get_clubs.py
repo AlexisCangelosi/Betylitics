@@ -6,7 +6,7 @@ import random  # For random delay between requests
 import requests
 from bs4 import BeautifulSoup
 from colorama import Fore, Style, init
-from helper import create_parser, log_info, log_success, log_error, log_warning
+from scripts.utils.helper import create_parser, log_info, log_success, log_error, log_warning
 from tqdm import tqdm
 
 # Initialize colorama for colored terminal output
