@@ -342,19 +342,18 @@ def process_match(match_url):
         dict: A dictionary containing 'events' and 'team_stats' keys.
     """
     # Introduce a random delay between 1 and 3 seconds
-    time.sleep(random.uniform(2, 3))
     print_info(f"Fetching match page: https://fbref.com{match_url}")
     try:
-        response = safe_get("https://fbref.com{match_url}")
+        response = safe_get(f"https://fbref.com{match_url}")
         response.raise_for_status()
     except Exception as e:
-        print_error(f"Failed to fetch match page {"https://fbref.com{match_url}"}: {e}")
+        print_error(f"Failed to fetch match page https://fbref.com{match_url}: {e}")
         return {"events": {}, "team_stats": {}}
-    soup = BeautifulSoup(response.content, "lxml")
+    soup = BeautifulSoup(response.content, "html.parser")
     # Extract events and team statistics from the match page
     events = extract_match_events(soup)
     team_stats = extract_team_stats(soup)
-    print_success(f"Successfully processed match page: {"https://fbref.com{match_url}"}")
+    print_success(f"Successfully processed match page: https://fbref.com{match_url}")
     return {"events": events, "team_stats": team_stats}
 
 def process_url(url, url_index, total, progress_bar=None):
@@ -389,7 +388,7 @@ def process_url(url, url_index, total, progress_bar=None):
         return None
 
     # Parse the page content once using BeautifulSoup
-    soup = BeautifulSoup(response.content, "lxml")
+    soup = BeautifulSoup(response.content, "html.parser")
     
     update_local(0.2, "Extracting team name from page")
     team = extract_team_name_from_soup(soup)
@@ -437,7 +436,7 @@ def process_url(url, url_index, total, progress_bar=None):
     
     return {"team": team, "team_logo_url": team_logo_url, "tables": merged_tables, "venues": venues}
 
-def fetch_fbref_stats(urls, output_file="artifacts/fbref_stats.json"):
+def fetch_fbref_stats(urls, full, output_file="artifacts/fbref_stats.json"):
     """
     Process a list of FBref URLs and output a JSON object with the results.
     For each URL, the script fetches standard data and match logs.
@@ -459,7 +458,7 @@ def fetch_fbref_stats(urls, output_file="artifacts/fbref_stats.json"):
     for index, url in enumerate(urls):
         print_info(f"Processing URL: {url}")
         data = process_url(url, index, total, progress_bar)
-        if data:
+        if data and full == True:
             # Process match logs for additional match data
             venues = data.get("venues", {})
             match_rows = venues.get("venues", [])
@@ -476,6 +475,7 @@ def fetch_fbref_stats(urls, output_file="artifacts/fbref_stats.json"):
                 if match_url:
                     print_info(f"Processing match URL: {match_url}")
                     match_data = process_match(match_url)
+                    time.sleep(random.uniform(2, 4))
                     # Aggregate event data
                     for team, minutes in match_data["events"].items():
                         if team not in aggregated_events:
