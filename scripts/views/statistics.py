@@ -217,7 +217,7 @@ def display_team_summary(datasets: list, logo):
         goals_scored = df_filtered["BM"].sum() if "BM" in df_filtered.columns else 0
         goals_conceded = df_filtered["BE"].sum() if "BE" in df_filtered.columns else 0
         goal_diff = goals_scored - goals_conceded
-        points = wins * 3 + draws
+        points = (wins * 3 + draws) / num_matches
 
         # Get last 5 match results as emoji
         df_for_chart = df_filtered.head(5)
@@ -245,7 +245,7 @@ def display_team_summary(datasets: list, logo):
             "Goals Scored": goals_scored,
             "Goals Conceded": goals_conceded,
             "Goal Diff": goal_diff,
-            "Points": points,
+            "PPG": points,
             "Last 5": emoji_str
         }
         form_rows.append(form_row)

@@ -1,7 +1,8 @@
 """
-FBref Stats Fetcher without Proxy Management
+FBref Stats Fetcher with Additional Match Data Extraction
 
-This script fetches FBref statistics for provided URLs without using any proxy.
+This script fetches FBref statistics for provided URLs and then extracts additional 
+match information (events and team stats) from each match page found in the venues.
 It performs HTTP GET requests directly and is compatible with Streamlit for progress display.
 """
 
@@ -188,6 +189,11 @@ def parse_table(table):
                     player_url = a_tag["href"] if a_tag and a_tag.has_attr("href") else ""
                     row_dict["Joueur URL"] = player_url
                     row_dict[header] = cell.get_text(strip=True)
+                if header.lower() == "rapport de match":
+                    a_tag = cell.find("a")
+                    match_url = a_tag["href"] if a_tag and a_tag.has_attr("href") else ""
+                    row_dict["Match URL"] = match_url
+                    row_dict[header] = cell.get_text(strip=True)
                 else:
                     row_dict[header] = cell.get_text(strip=True)
             # If the row has a "MJ" column and its value is 0, skip this row
@@ -224,21 +230,147 @@ def merge_keeper_stats(standard_tables, extra_tables):
                                 std_header[key] = tip
     return standard_tables
 
+def extract_match_events(soup):
+    """
+    Extract match events from the match page.
+    Events are extracted from divs with id "a" and "b".
+    For each event, extract the minute (using regex to find numeric values).
+    Returns:
+        dict: Mapping of team names to a list of event minutes.
+    """
+    events = {}
+    # Attempt to get team names from team_stats header; if not available, default to "Team A" and "Team B"
+    team_names = {"a": "Team A", "b": "Team B"}
+    team_stats_div = soup.find(id="team_stats")
+    if team_stats_div:
+        headers = team_stats_div.find_all(["h1", "h2", "h3"])
+        if len(headers) >= 2:
+            team_names["a"] = headers[0].get_text(strip=True)
+            team_names["b"] = headers[1].get_text(strip=True)
+    
+    # Process both events divs: "a" and "b"
+    for div_id in ["a", "b"]:
+        div = soup.find(id=div_id)
+        team_key = team_names.get(div_id, f"Team {div_id.upper()}")
+        events[team_key] = []
+        if div:
+            # Look for event elements inside the div (either <div class="event"> or <li> items)
+            event_elements = div.find_all(["div", "li"], class_="event")
+            if not event_elements:
+                event_elements = div.find_all(["div", "li"])
+            for event in event_elements:
+                text = event.get_text(strip=True)
+                # Extract the first number encountered (representing the minute)
+                match = re.search(r"(\d+)", text)
+                if match:
+                    minute = int(match.group(1))
+                    events[team_key].append(minute)
+        else:
+            print_warning(f"Events div with id '{div_id}' not found in match page.")
+    return events
+
+def extract_team_stats(soup):
+    """
+    Extract team statistics from the match page.
+    Looks for a div with id "team_stats" and extracts stats such as possession,
+    pass success rate, shots on target, yellow cards, and red cards.
+    Assumes that the div contains a table where:
+        - The first row has headers with team names.
+        - Each subsequent row contains: stat name, value for team A, value for team B.
+    Returns:
+        dict: Dictionary with keys for each stat, mapping to a dict of team values.
+    """
+    stats = {
+        "possession": {},
+        "Pourcentage de passes réussies": {},
+        "Tirs cadrés": {},
+        "Carton jaune": {},
+        "Carton rouge": {}
+    }
+    team_stats_div = soup.find(id="team_stats")
+    if team_stats_div:
+        table = team_stats_div.find("table")
+        if table:
+            rows = table.find_all("tr")
+            if len(rows) >= 2:
+                headers = rows[0].find_all(["th", "td"])
+                if len(headers) >= 3:
+                    team_a = headers[1].get_text(strip=True)
+                    team_b = headers[2].get_text(strip=True)
+                else:
+                    team_a = "Team A"
+                    team_b = "Team B"
+                # Process each stat row
+                for row in rows[1:]:
+                    cells = row.find_all(["th", "td"])
+                    if len(cells) >= 3:
+                        stat_name = cells[0].get_text(strip=True)
+                        value_a = cells[1].get_text(strip=True)
+                        value_b = cells[2].get_text(strip=True)
+                        # Map the stat name to our desired keys (case-insensitive matching)
+                        lower_stat = stat_name.lower()
+                        if lower_stat in ["possession"]:
+                            stats["possession"][team_a] = value_a
+                            stats["possession"][team_b] = value_b
+                        elif lower_stat in ["pourcentage de passes réussies", "passes", "pass success", "pass success rate"]:
+                            stats["Pourcentage de passes réussies"][team_a] = value_a
+                            stats["Pourcentage de passes réussies"][team_b] = value_b
+                        elif lower_stat in ["tirs cadrés", "shots on target"]:
+                            stats["Tirs cadrés"][team_a] = value_a
+                            stats["Tirs cadrés"][team_b] = value_b
+                        elif lower_stat in ["carton jaune", "yellow cards"]:
+                            stats["Carton jaune"][team_a] = value_a
+                            stats["Carton jaune"][team_b] = value_b
+                        elif lower_stat in ["carton rouge", "red cards"]:
+                            stats["Carton rouge"][team_a] = value_a
+                            stats["Carton rouge"][team_b] = value_b
+        else:
+            print_warning("No table found in team_stats div.")
+    else:
+        print_warning("team_stats div not found in match page.")
+    return stats
+
+def process_match(match_url):
+    """
+    Process a single match URL to extract event data and team statistics.
+    A random delay between 1 and 3 seconds is applied before each request to avoid HTTP 429 errors.
+    
+    Args:
+        match_url (str): The URL of the match page.
+    
+    Returns:
+        dict: A dictionary containing 'events' and 'team_stats' keys.
+    """
+    # Introduce a random delay between 1 and 3 seconds
+    time.sleep(random.uniform(2, 3))
+    print_info(f"Fetching match page: https://fbref.com{match_url}")
+    try:
+        response = safe_get("https://fbref.com{match_url}")
+        response.raise_for_status()
+    except Exception as e:
+        print_error(f"Failed to fetch match page {"https://fbref.com{match_url}"}: {e}")
+        return {"events": {}, "team_stats": {}}
+    soup = BeautifulSoup(response.content, "lxml")
+    # Extract events and team statistics from the match page
+    events = extract_match_events(soup)
+    team_stats = extract_team_stats(soup)
+    print_success(f"Successfully processed match page: {"https://fbref.com{match_url}"}")
+    return {"events": events, "team_stats": team_stats}
+
 def process_url(url, url_index, total, progress_bar=None):
     """
     Process a single FBref URL with detailed sub-steps updated via the progress bar.
-    This function now performs a single HTTP request, then reuses the page content for both
-    team name extraction and table parsing.
+    This function performs a single HTTP request, then reuses the page content for:
+      1. Transforming the URL (if needed)
+      2. Fetching the page (GET request using safe_get)
+      3. Parsing the page (using BeautifulSoup)
+      4. Extracting the team name and logo
+      5. Parsing standard and extra tables
+      6. Merging extra stats into standard tables
+      7. Retrieving match logs (venues)
+      8. Finalizing and returning data
     
-    Sub-steps:
-      1. Transform URL (if needed)
-      2. Fetch page (GET request using safe_get)
-      3. Parse the page (using BeautifulSoup)
-      4. Extract team name from the parsed content
-      5. Parse standard and extra tables
-      6. Merge extra stats into standard tables
-      7. Retrieve calendar/results (match logs)
-      8. Finalize and return data
+    Additionally, match logs (venues) will later be used to extract match events and team statistics.
     """
     def update_local(fraction, step_text=""):
         if progress_bar:
@@ -273,8 +405,7 @@ def process_url(url, url_index, total, progress_bar=None):
             if img_tag and img_tag.get("src"):
                 team_logo_url = urllib.parse.urljoin(url, img_tag["src"])
     
-
-    update_local(0.3, "Parsing standard tables")
+    update_local(1.3, "Parsing standard tables")
     standard_tables = soup.find_all("table", id=lambda x: x and x.startswith("stats_standard_"))
     standard_tables_data = [parse_table(table) for table in standard_tables]
 
@@ -301,7 +432,7 @@ def process_url(url, url_index, total, progress_bar=None):
     venues = {"header": parse_table(matchlogs_table)["header"], "venues": parse_table(matchlogs_table)["rows"]} if matchlogs_table else {}
 
     update_local(0.9, "Finalizing data")
-    time.sleep(2)
+    time.sleep(random.uniform(0, 2))
     update_local(1.0, "URL processing complete")
     
     return {"team": team, "team_logo_url": team_logo_url, "tables": merged_tables, "venues": venues}
@@ -309,7 +440,9 @@ def process_url(url, url_index, total, progress_bar=None):
 def fetch_fbref_stats(urls, output_file="artifacts/fbref_stats.json"):
     """
     Process a list of FBref URLs and output a JSON object with the results.
-    The progress bar is updated in detail for each URL and its sub-steps if Streamlit is available.
+    For each URL, the script fetches standard data and match logs.
+    Then, for each match log (venue) that contains a Match URL, it fetches additional 
+    match events and team statistics.
     
     Example usage:
         test_urls = [
@@ -327,8 +460,38 @@ def fetch_fbref_stats(urls, output_file="artifacts/fbref_stats.json"):
         print_info(f"Processing URL: {url}")
         data = process_url(url, index, total, progress_bar)
         if data:
+            # Process match logs for additional match data
+            venues = data.get("venues", {})
+            match_rows = venues.get("venues", [])
+            aggregated_events = {}
+            aggregated_team_stats = {
+                "possession": {},
+                "Pourcentage de passes réussies": {},
+                "Tirs cadrés": {},
+                "Carton jaune": {},
+                "Carton rouge": {}
+            }
+            for row in match_rows:
+                match_url = row.get("Match URL", "")
+                if match_url:
+                    print_info(f"Processing match URL: {match_url}")
+                    match_data = process_match(match_url)
+                    # Aggregate event data
+                    for team, minutes in match_data["events"].items():
+                        if team not in aggregated_events:
+                            aggregated_events[team] = []
+                        aggregated_events[team].extend(minutes)
+                    # Aggregate team stats (overwrite if multiple matches exist)
+                    for stat, teams in match_data["team_stats"].items():
+                        for team, value in teams.items():
+                            aggregated_team_stats[stat][team] = value
+            # Integrate aggregated match data into venues
+            if venues:
+                venues["events"] = aggregated_events
+                venues["team_stats"] = aggregated_team_stats
+                data["venues"] = venues
             datasets.append(data)
-        time.sleep(3)
+        time.sleep(random.uniform(1, 3))
     
     if progress_bar:
         progress_bar.progress(100, text="Processing complete")

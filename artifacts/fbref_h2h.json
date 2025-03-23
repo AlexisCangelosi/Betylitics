@@ -1,34 +1,34 @@
 {
-    "h2h_url": "https://fbref.com/fr/stathead/matchup/teams/15f49df1/54582b93/Historique-Barcelona-Women-contre-Real-Madrid-Women",
+    "h2h_url": "https://fbref.com/fr/stathead/matchup/teams/e04b1b89/93d5086f/Historique-Twente-Women-contre-Heerenveen-Women",
     "scorebox": {
         "home_team": [
-            "Barcelona",
+            "Twente",
             {
-                "victoires": "7"
+                "victoires": "12"
             },
             {
-                "matchs nuls": "0"
+                "match nul": "1"
             },
             {
                 "défaites": "0"
             },
             {
-                "buts": "25"
+                "buts": "52"
             }
         ],
         "away_team": [
-            "Real Madrid",
+            "Heerenveen",
             {
                 "victoires": "0"
             },
             {
-                "matchs nuls": "0"
+                "match nul": "1"
             },
             {
-                "défaites": "7"
+                "défaites": "12"
             },
             {
-                "buts": "3"
+                "buts": "5"
             }
         ]
     },
@@ -40,9 +40,7 @@
             "Date",
             "Heure",
             "Domicile",
-            "xG",
             "Score",
-            "xG",
             "Extérieur",
             "Affluence",
             "Tribune",
@@ -52,116 +50,197 @@
         ],
         "rows": [
             {
-                "Comp": "Liga F",
-                "Tour": "Liga F",
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
                 "Jour": "Dim",
                 "Date": "2025-03-23",
-                "Heure": "12:00",
-                "Domicile": "Barcelona",
-                "Extérieur": "Real Madrid",
-                "Tribune": "Estadi Olímpic Lluís Companys"
+                "Heure": "12:15",
+                "Domicile": "Twente",
+                "Extérieur": "Heerenveen",
+                "Tribune": "Sportpark Schreurserve"
             },
             {
-                "Comp": "Liga F",
-                "Tour": "Liga F",
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
                 "Jour": "Sam",
-                "Date": "2024-11-16",
-                "Heure": "20:00",
-                "Domicile": "Real Madrid",
-                "xG": "1.9",
+                "Date": "2024-12-07",
+                "Heure": "14:00",
+                "Domicile": "Heerenveen",
                 "Score": "0–4",
-                "Extérieur": "Barcelona",
-                "Tribune": "Estadio Alfredo Di Stéfano",
-                "Arbitre": "Bruno Gallo",
-                "Rapport de match": "https://fbref.com/fr/matchs/3bf1c281/Real-Madrid-Barcelona-16-Novembre-2024-Liga-F"
+                "Extérieur": "Twente",
+                "Tribune": "Sportpark Skoatterwâld",
+                "Arbitre": "Tommy Postma",
+                "Rapport de match": "https://fbref.com/fr/matchs/2b0190d6/Heerenveen-Twente-7-Decembre-2024-Eredivisie-Vrouwen"
             },
             {
-                "Comp": "Liga F",
-                "Tour": "Liga F",
-                "Jour": "Dim",
-                "Date": "2024-03-24",
-                "Heure": "18:00",
-                "Domicile": "Real Madrid",
-                "xG": "4.2",
-                "Score": "0–3",
-                "Extérieur": "Barcelona",
-                "Tribune": "Estadio Alfredo Di Stéfano",
-                "Arbitre": "André Dias",
-                "Rapport de match": "https://fbref.com/fr/matchs/98679c0f/Real-Madrid-Barcelona-24-Mars-2024-Liga-F"
-            },
-            {
-                "Comp": "Liga F",
-                "Tour": "Liga F",
-                "Jour": "Dim",
-                "Date": "2023-11-19",
-                "Heure": "12:00",
-                "Domicile": "Barcelona",
-                "xG": "0.2",
-                "Score": "5–0",
-                "Extérieur": "Real Madrid",
-                "Tribune": "Estadi Olímpic Lluís Companys",
-                "Arbitre": "María Eugenia Gil Soriano",
-                "Rapport de match": "https://fbref.com/fr/matchs/5a9cf437/Barcelona-Real-Madrid-19-Novembre-2023-Liga-F"
-            },
-            {
-                "Comp": "Liga F",
-                "Tour": "Liga F",
-                "Jour": "Sam",
-                "Date": "2023-03-25",
-                "Heure": "18:15",
-                "Domicile": "Barcelona",
-                "xG": "0.3",
-                "Score": "1–0",
-                "Extérieur": "Real Madrid",
-                "Tribune": "Estadi Johan Cruyff",
-                "Arbitre": "André Dias",
-                "Rapport de match": "https://fbref.com/fr/matchs/9f42ca86/Barcelona-Real-Madrid-25-Mars-2023-Liga-F"
-            },
-            {
-                "Comp": "Liga F",
-                "Tour": "Liga F",
-                "Jour": "Dim",
-                "Date": "2022-11-06",
-                "Heure": "18:00",
-                "Domicile": "Real Madrid",
-                "xG": "3.4",
-                "Score": "0–4",
-                "Extérieur": "Barcelona",
-                "Tribune": "Estadio Alfredo Di Stéfano",
-                "Arbitre": "Marta Frías Acedo",
-                "Rapport de match": "https://fbref.com/fr/matchs/b0c2dbac/Real-Madrid-Barcelona-6-Novembre-2022-Liga-F"
-            },
-            {
-                "Comp": "Champions Lg",
-                "Tour": "Quarts de finale",
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
                 "Jour": "Mer",
-                "Date": "2022-03-30",
-                "Heure": "18:45",
-                "Domicile": "Barcelona",
-                "xG": "1.1",
-                "Score": "5–2",
-                "Extérieur": "Real Madrid",
-                "Affluence": "91,553",
-                "Tribune": "Camp Nou",
-                "Arbitre": "Stéphanie Frappart",
-                "Rapport de match": "https://fbref.com/fr/matchs/74789a44/Barcelona-Real-Madrid-30-Mars-2022-Champions-League",
-                "Notes": "Étape 2 sur 2; Barcelona a gagné"
+                "Date": "2024-01-31",
+                "Heure": "19:30",
+                "Domicile": "Heerenveen",
+                "Score": "0–2",
+                "Extérieur": "Twente",
+                "Affluence": "275",
+                "Tribune": "Sportpark Skoatterwâld",
+                "Arbitre": "Steve Oosterkamp",
+                "Rapport de match": "https://fbref.com/fr/matchs/360a83fd/Heerenveen-Twente-31-Janvier-2024-Eredivisie-Vrouwen"
             },
             {
-                "Comp": "Champions Lg",
-                "Tour": "Quarts de finale",
-                "Jour": "Mar",
-                "Date": "2022-03-22",
-                "Heure": "21:00",
-                "Domicile": "Real Madrid",
-                "xG": "3.1",
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
+                "Jour": "Dim",
+                "Date": "2023-12-17",
+                "Heure": "16:45",
+                "Domicile": "Twente",
+                "Score": "3–2",
+                "Extérieur": "Heerenveen",
+                "Affluence": "310",
+                "Tribune": "Sportpark Schreurserve",
+                "Arbitre": "Wendy Gijsbers",
+                "Rapport de match": "https://fbref.com/fr/matchs/3dcd2c04/Twente-Heerenveen-17-Decembre-2023-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
+                "Jour": "Ven",
+                "Date": "2023-01-27",
+                "Heure": "19:30",
+                "Domicile": "Twente",
+                "Score": "7–0",
+                "Extérieur": "Heerenveen",
+                "Tribune": "Sportpark Het Diekman",
+                "Arbitre": "Jarno Schoonhoven",
+                "Rapport de match": "https://fbref.com/fr/matchs/31f2f910/Twente-Heerenveen-27-Janvier-2023-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
+                "Jour": "Dim",
+                "Date": "2022-10-16",
+                "Heure": "12:15",
+                "Domicile": "Heerenveen",
+                "Score": "0–9",
+                "Extérieur": "Twente",
+                "Affluence": "225",
+                "Tribune": "Sportpark Skoatterwâld",
+                "Arbitre": "Mark Weaver",
+                "Rapport de match": "https://fbref.com/fr/matchs/491ff476/Heerenveen-Twente-16-Octobre-2022-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
+                "Jour": "Ven",
+                "Date": "2022-04-22",
+                "Heure": "19:30",
+                "Domicile": "Twente",
+                "Score": "3–0",
+                "Extérieur": "Heerenveen",
+                "Affluence": "150",
+                "Tribune": "Sportpark Het Diekman",
+                "Arbitre": "Pim Weghors",
+                "Rapport de match": "https://fbref.com/fr/matchs/f6aa5575/Twente-Heerenveen-22-Avril-2022-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
+                "Jour": "Dim",
+                "Date": "2022-02-27",
+                "Heure": "12:15",
+                "Domicile": "Heerenveen",
+                "Score": "0–2",
+                "Extérieur": "Twente",
+                "Affluence": "150",
+                "Tribune": "Sportpark Skoatterwâld",
+                "Arbitre": "Florian Lodeweeg",
+                "Rapport de match": "https://fbref.com/fr/matchs/d69fb8ca/Heerenveen-Twente-27-Fevrier-2022-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Eredivisie Vrouwen",
+                "Jour": "Ven",
+                "Date": "2021-10-29",
+                "Heure": "19:30",
+                "Domicile": "Twente",
+                "Score": "8–0",
+                "Extérieur": "Heerenveen",
+                "Affluence": "350",
+                "Tribune": "Sportpark Het Diekman",
+                "Arbitre": "Jelle Besselsen",
+                "Rapport de match": "https://fbref.com/fr/matchs/8c1fa301/Twente-Heerenveen-29-Octobre-2021-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Saison régulière",
+                "Jour": "Ven",
+                "Date": "2021-03-12",
+                "Heure": "19:30",
+                "Domicile": "Heerenveen",
+                "Score": "2–6",
+                "Extérieur": "Twente",
+                "Tribune": "Sportcomplex Nieuwehorne",
+                "Arbitre": "Sven Spaan",
+                "Rapport de match": "https://fbref.com/fr/matchs/7dab5c29/Heerenveen-Twente-12-Mars-2021-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Saison régulière",
+                "Jour": "Ven",
+                "Date": "2020-10-30",
+                "Heure": "19:30",
+                "Domicile": "Twente",
+                "Score": "3–0",
+                "Extérieur": "Heerenveen",
+                "Tribune": "Sportpark Het Diekman",
+                "Arbitre": "Sven Spaan",
+                "Rapport de match": "https://fbref.com/fr/matchs/66af64a0/Twente-Heerenveen-30-Octobre-2020-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Saison régulière",
+                "Jour": "Ven",
+                "Date": "2020-03-20",
+                "Heure": "19:30",
+                "Domicile": "Twente",
+                "Extérieur": "Heerenveen",
+                "Rapport de match": "https://fbref.com/fr/matchs/c39892e4/Twente-Heerenveen-20-Mars-2020-Eredivisie-Vrouwen",
+                "Notes": "Match annulé"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Saison régulière",
+                "Jour": "Ven",
+                "Date": "2019-10-11",
+                "Heure": "19:30",
+                "Domicile": "Heerenveen",
                 "Score": "1–3",
-                "Extérieur": "Barcelona",
-                "Affluence": "3,318",
-                "Tribune": "Estadio Alfredo Di Stéfano",
-                "Arbitre": "Lina Lehtovaara",
-                "Rapport de match": "https://fbref.com/fr/matchs/c6bf7bcf/Real-Madrid-Barcelona-22-Mars-2022-Champions-League",
-                "Notes": "Étape 1 sur 2"
+                "Extérieur": "Twente",
+                "Tribune": "Sportpark Skoatterwâld",
+                "Rapport de match": "https://fbref.com/fr/matchs/b6f0057d/Heerenveen-Twente-11-Octobre-2019-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Saison régulière",
+                "Jour": "Ven",
+                "Date": "2018-12-14",
+                "Heure": "19:30",
+                "Domicile": "Heerenveen",
+                "Score": "0–2",
+                "Extérieur": "Twente",
+                "Tribune": "Sportpark Skoatterwâld",
+                "Rapport de match": "https://fbref.com/fr/matchs/3e4485bd/Heerenveen-Twente-14-Decembre-2018-Eredivisie-Vrouwen"
+            },
+            {
+                "Comp": "Eredivisie",
+                "Tour": "Saison régulière",
+                "Jour": "Ven",
+                "Date": "2018-10-19",
+                "Heure": "19:30",
+                "Domicile": "Twente",
+                "Score": "0–0",
+                "Extérieur": "Heerenveen",
+                "Tribune": "Sportpark 't Wilbert",
+                "Rapport de match": "https://fbref.com/fr/matchs/9e03cb68/Twente-Heerenveen-19-Octobre-2018-Eredivisie-Vrouwen"
             }
         ]
     }
