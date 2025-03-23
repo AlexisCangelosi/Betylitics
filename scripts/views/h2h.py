@@ -404,6 +404,7 @@ def display_data(matches, home_team_name,away_team_name,logo):
         justify-content: center;
         border-radius: 10px;
         margin-bottom: 10px;
+
         }
 
         /* Boîte principale avec layout horizontal */
@@ -491,7 +492,7 @@ def display_data(matches, home_team_name,away_team_name,logo):
 
     # Example metric display with a centered title above the metric value.
     # Example metric display with a centered title above the metric value.
-    col1, col2, col3 = st.columns([5,2,5])
+    col1, col2, col3 = st.columns([6,1.5,6])
     col2.markdown(
         f"""
         <div class="stats-container box1">
@@ -509,7 +510,7 @@ def display_data(matches, home_team_name,away_team_name,logo):
         """,
         unsafe_allow_html=True
     )
-    col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
+    col1, col2,col3,col4,col5 = st.columns([4,3.5,1,3.5,4])
     col2.markdown(
         f"""
         <div class="stats-container {col1_bg_color}">
@@ -566,7 +567,7 @@ def display_data(matches, home_team_name,away_team_name,logo):
         """,
         unsafe_allow_html=True
     )
-    col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
+    col1, col2,col3,col4,col5,col6= st.columns([4,1.5,1.5,1.5,1.5,4])
     col2.markdown(
         f"""
         <div class="stats-container" style="background: {get_gradient_from_percentage(btts_pct * 100)}">
