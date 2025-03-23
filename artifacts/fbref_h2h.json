@@ -1,34 +1,34 @@
 {
-    "h2h_url": "https://fbref.com/fr/stathead/matchup/teams/7fdd64e0/5725cc7b/Historique-Reims-contre-Marseille",
+    "h2h_url": "https://fbref.com/fr/stathead/matchup/teams/15f49df1/54582b93/Historique-Barcelona-Women-contre-Real-Madrid-Women",
     "scorebox": {
         "home_team": [
-            "Reims",
+            "Barcelona",
             {
-                "victoires": "5"
+                "victoires": "7"
             },
             {
-                "matchs nuls": "7"
+                "matchs nuls": "0"
             },
             {
-                "défaites": "8"
+                "défaites": "0"
             },
             {
-                "buts": "20"
+                "buts": "25"
             }
         ],
         "away_team": [
-            "Marseille",
+            "Real Madrid",
             {
-                "victoires": "8"
+                "victoires": "0"
             },
             {
-                "matchs nuls": "7"
+                "matchs nuls": "0"
             },
             {
-                "défaites": "5"
+                "défaites": "7"
             },
             {
-                "buts": "29"
+                "buts": "3"
             }
         ]
     },
@@ -52,306 +52,116 @@
         ],
         "rows": [
             {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
+                "Comp": "Liga F",
+                "Tour": "Liga F",
+                "Jour": "Dim",
+                "Date": "2025-03-23",
+                "Heure": "12:00",
+                "Domicile": "Barcelona",
+                "Extérieur": "Real Madrid",
+                "Tribune": "Estadi Olímpic Lluís Companys"
+            },
+            {
+                "Comp": "Liga F",
+                "Tour": "Liga F",
                 "Jour": "Sam",
-                "Date": "2025-03-29",
-                "Heure": "17:00",
-                "Domicile": "Reims",
-                "Extérieur": "Marseille",
-                "Tribune": "Stade Auguste-Delaune"
+                "Date": "2024-11-16",
+                "Heure": "20:00",
+                "Domicile": "Real Madrid",
+                "xG": "1.9",
+                "Score": "0–4",
+                "Extérieur": "Barcelona",
+                "Tribune": "Estadio Alfredo Di Stéfano",
+                "Arbitre": "Bruno Gallo",
+                "Rapport de match": "https://fbref.com/fr/matchs/3bf1c281/Real-Madrid-Barcelona-16-Novembre-2024-Liga-F"
             },
             {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
+                "Comp": "Liga F",
+                "Tour": "Liga F",
                 "Jour": "Dim",
-                "Date": "2024-08-25",
-                "Heure": "20:45",
-                "Domicile": "Marseille",
-                "xG": "0.9",
-                "Score": "2–2",
-                "Extérieur": "Reims",
-                "Affluence": "63,841",
-                "Tribune": "Orange Vélodrome",
-                "Rapport de match": "https://fbref.com/fr/matchs/3a93bc8b/Marseille-Reims-25-Aout-2024-Ligue-1"
+                "Date": "2024-03-24",
+                "Heure": "18:00",
+                "Domicile": "Real Madrid",
+                "xG": "4.2",
+                "Score": "0–3",
+                "Extérieur": "Barcelona",
+                "Tribune": "Estadio Alfredo Di Stéfano",
+                "Arbitre": "André Dias",
+                "Rapport de match": "https://fbref.com/fr/matchs/98679c0f/Real-Madrid-Barcelona-24-Mars-2024-Liga-F"
             },
             {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Mer",
-                "Date": "2024-05-15",
-                "Heure": "21:00",
-                "Domicile": "Reims",
-                "xG": "1.7",
-                "Score": "1–0",
-                "Extérieur": "Marseille",
-                "Affluence": "19,020",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "Hakim Ben El Hadj Salem",
-                "Rapport de match": "https://fbref.com/fr/matchs/5a6454f2/Reims-Marseille-15-Mai-2024-Ligue-1"
+                "Comp": "Liga F",
+                "Tour": "Liga F",
+                "Jour": "Dim",
+                "Date": "2023-11-19",
+                "Heure": "12:00",
+                "Domicile": "Barcelona",
+                "xG": "0.2",
+                "Score": "5–0",
+                "Extérieur": "Real Madrid",
+                "Tribune": "Estadi Olímpic Lluís Companys",
+                "Arbitre": "María Eugenia Gil Soriano",
+                "Rapport de match": "https://fbref.com/fr/matchs/5a9cf437/Barcelona-Real-Madrid-19-Novembre-2023-Liga-F"
             },
             {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
+                "Comp": "Liga F",
+                "Tour": "Liga F",
                 "Jour": "Sam",
-                "Date": "2023-08-12",
-                "Heure": "17:00",
-                "Domicile": "Marseille",
-                "xG": "0.8",
-                "Score": "2–1",
-                "Extérieur": "Reims",
-                "Affluence": "63,787",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "Eric Wattellier",
-                "Rapport de match": "https://fbref.com/fr/matchs/fdbcc9e3/Marseille-Reims-12-Aout-2023-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Dim",
-                "Date": "2023-03-19",
-                "Heure": "20:45",
-                "Domicile": "Reims",
-                "xG": "1.2",
-                "Score": "1–2",
-                "Extérieur": "Marseille",
-                "Affluence": "20,479",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "François Letexier",
-                "Rapport de match": "https://fbref.com/fr/matchs/0161e53d/Reims-Marseille-19-Mars-2023-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Dim",
-                "Date": "2022-08-07",
-                "Heure": "20:45",
-                "Domicile": "Marseille",
-                "xG": "0.9",
-                "Score": "4–1",
-                "Extérieur": "Reims",
-                "Affluence": "62,738",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "Jérôme Brisard",
-                "Rapport de match": "https://fbref.com/fr/matchs/534ab8ff/Marseille-Reims-7-Aout-2022-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Dim",
-                "Date": "2022-04-24",
-                "Heure": "20:45",
-                "Domicile": "Reims",
-                "xG": "0.6",
-                "Score": "0–1",
-                "Extérieur": "Marseille",
-                "Affluence": "20,835",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "Jérôme Brisard",
-                "Rapport de match": "https://fbref.com/fr/matchs/6e980607/Reims-Marseille-24-Avril-2022-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Mer",
-                "Date": "2021-12-22",
-                "Heure": "21:00",
-                "Domicile": "Marseille",
-                "xG": "0.8",
-                "Score": "1–1",
-                "Extérieur": "Reims",
-                "Affluence": "55,908",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "François Letexier",
-                "Rapport de match": "https://fbref.com/fr/matchs/b7d65ab0/Marseille-Reims-22-Decembre-2021-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Ven",
-                "Date": "2021-04-23",
-                "Heure": "21:00",
-                "Domicile": "Reims",
-                "xG": "2.1",
-                "Score": "1–3",
-                "Extérieur": "Marseille",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "Eric Wattellier",
-                "Rapport de match": "https://fbref.com/fr/matchs/6b30b4bd/Reims-Marseille-23-Avril-2021-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Sam",
-                "Date": "2020-12-19",
-                "Heure": "19:00",
-                "Domicile": "Marseille",
+                "Date": "2023-03-25",
+                "Heure": "18:15",
+                "Domicile": "Barcelona",
                 "xG": "0.3",
-                "Score": "1–1",
-                "Extérieur": "Reims",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "Thomas Léonard",
-                "Rapport de match": "https://fbref.com/fr/matchs/bea6f7ea/Marseille-Reims-19-Decembre-2020-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Sam",
-                "Date": "2020-05-23",
-                "Domicile": "Reims",
-                "Extérieur": "Marseille",
-                "Tribune": "Stade Auguste-Delaune",
-                "Rapport de match": "https://fbref.com/fr/matchs/6ae2dd0a/Reims-Marseille-23-Mai-2020-Ligue-1",
-                "Notes": "Match annulé"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Sam",
-                "Date": "2019-08-10",
-                "Heure": "17:30",
-                "Domicile": "Marseille",
-                "xG": "1.2",
-                "Score": "0–2",
-                "Extérieur": "Reims",
-                "Affluence": "52,887",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "Jérôme Brisard",
-                "Rapport de match": "https://fbref.com/fr/matchs/d7e26ebe/Marseille-Reims-10-Aout-2019-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Sam",
-                "Date": "2019-02-02",
-                "Heure": "21:00",
-                "Domicile": "Reims",
-                "xG": "1.2",
-                "Score": "2–1",
-                "Extérieur": "Marseille",
-                "Affluence": "20,546",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "François Letexier",
-                "Rapport de match": "https://fbref.com/fr/matchs/53da28a7/Reims-Marseille-2-Fevrier-2019-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Dim",
-                "Date": "2018-12-02",
-                "Heure": "17:00",
-                "Domicile": "Marseille",
-                "xG": "0.7",
-                "Score": "0–0",
-                "Extérieur": "Reims",
-                "Affluence": "41,932",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "Nicolas Rainville",
-                "Rapport de match": "https://fbref.com/fr/matchs/c1916b5a/Marseille-Reims-2-Decembre-2018-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Sam",
-                "Date": "2016-05-07",
-                "Heure": "21:00",
-                "Domicile": "Marseille",
                 "Score": "1–0",
-                "Extérieur": "Reims",
-                "Affluence": "20,767",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "Nicolas Rainville",
-                "Rapport de match": "https://fbref.com/fr/matchs/b0c8467c/Marseille-Reims-7-Mai-2016-Ligue-1"
+                "Extérieur": "Real Madrid",
+                "Tribune": "Estadi Johan Cruyff",
+                "Arbitre": "André Dias",
+                "Rapport de match": "https://fbref.com/fr/matchs/9f42ca86/Barcelona-Real-Madrid-25-Mars-2023-Liga-F"
             },
             {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
+                "Comp": "Liga F",
+                "Tour": "Liga F",
                 "Jour": "Dim",
-                "Date": "2015-08-16",
-                "Heure": "14:00",
-                "Domicile": "Reims",
-                "Score": "1–0",
-                "Extérieur": "Marseille",
-                "Affluence": "20,950",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "Benoît Bastien",
-                "Rapport de match": "https://fbref.com/fr/matchs/acf62a11/Reims-Marseille-16-Aout-2015-Ligue-1"
+                "Date": "2022-11-06",
+                "Heure": "18:00",
+                "Domicile": "Real Madrid",
+                "xG": "3.4",
+                "Score": "0–4",
+                "Extérieur": "Barcelona",
+                "Tribune": "Estadio Alfredo Di Stéfano",
+                "Arbitre": "Marta Frías Acedo",
+                "Rapport de match": "https://fbref.com/fr/matchs/b0c2dbac/Real-Madrid-Barcelona-6-Novembre-2022-Liga-F"
             },
             {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Ven",
-                "Date": "2015-02-13",
-                "Heure": "20:30",
-                "Domicile": "Marseille",
-                "Score": "2–2",
-                "Extérieur": "Reims",
-                "Affluence": "43,653",
-                "Tribune": "Orange Vélodrome",
-                "Arbitre": "Philippe Kalt",
-                "Rapport de match": "https://fbref.com/fr/matchs/e1d92d4e/Marseille-Reims-13-Fevrier-2015-Ligue-1"
+                "Comp": "Champions Lg",
+                "Tour": "Quarts de finale",
+                "Jour": "Mer",
+                "Date": "2022-03-30",
+                "Heure": "18:45",
+                "Domicile": "Barcelona",
+                "xG": "1.1",
+                "Score": "5–2",
+                "Extérieur": "Real Madrid",
+                "Affluence": "91,553",
+                "Tribune": "Camp Nou",
+                "Arbitre": "Stéphanie Frappart",
+                "Rapport de match": "https://fbref.com/fr/matchs/74789a44/Barcelona-Real-Madrid-30-Mars-2022-Champions-League",
+                "Notes": "Étape 2 sur 2; Barcelona a gagné"
             },
             {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
+                "Comp": "Champions Lg",
+                "Tour": "Quarts de finale",
                 "Jour": "Mar",
-                "Date": "2014-09-23",
-                "Heure": "19:00",
-                "Domicile": "Reims",
-                "Score": "0–5",
-                "Extérieur": "Marseille",
-                "Affluence": "17,705",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "Antony Gautier",
-                "Rapport de match": "https://fbref.com/fr/matchs/2dc742ae/Reims-Marseille-23-Septembre-2014-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Ven",
-                "Date": "2014-03-14",
-                "Domicile": "Reims",
-                "Score": "1–1",
-                "Extérieur": "Marseille",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "Benoît Bastien",
-                "Rapport de match": "https://fbref.com/fr/matchs/ccd1b93a/Reims-Marseille-14-Mars-2014-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Sam",
-                "Date": "2013-10-26",
-                "Domicile": "Marseille",
-                "Score": "2–3",
-                "Extérieur": "Reims",
-                "Tribune": "Stade Vélodrome",
-                "Arbitre": "Amaury Delerue",
-                "Rapport de match": "https://fbref.com/fr/matchs/6a8885a5/Marseille-Reims-26-Octobre-2013-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Dim",
-                "Date": "2013-05-26",
-                "Domicile": "Marseille",
-                "Score": "0–0",
-                "Extérieur": "Reims",
-                "Tribune": "Stade Vélodrome",
-                "Arbitre": "Fredy Fautrel",
-                "Rapport de match": "https://fbref.com/fr/matchs/8eee6a8c/Marseille-Reims-26-Mai-2013-Ligue-1"
-            },
-            {
-                "Comp": "Ligue 1",
-                "Tour": "Ligue 1",
-                "Jour": "Dim",
-                "Date": "2012-08-12",
-                "Domicile": "Reims",
-                "Score": "0–1",
-                "Extérieur": "Marseille",
-                "Tribune": "Stade Auguste-Delaune",
-                "Arbitre": "Saïd Ennjimi",
-                "Rapport de match": "https://fbref.com/fr/matchs/4b2cc5f1/Reims-Marseille-12-Aout-2012-Ligue-1"
+                "Date": "2022-03-22",
+                "Heure": "21:00",
+                "Domicile": "Real Madrid",
+                "xG": "3.1",
+                "Score": "1–3",
+                "Extérieur": "Barcelona",
+                "Affluence": "3,318",
+                "Tribune": "Estadio Alfredo Di Stéfano",
+                "Arbitre": "Lina Lehtovaara",
+                "Rapport de match": "https://fbref.com/fr/matchs/c6bf7bcf/Real-Madrid-Barcelona-22-Mars-2022-Champions-League",
+                "Notes": "Étape 1 sur 2"
             }
         ]
     }
