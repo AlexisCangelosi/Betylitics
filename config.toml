@@ -1,0 +1,14 @@
+[client]
+showErrorDetails = "none"
+
+[server]
+runOnSave = true
+
+[theme]
+base="dark"
+primaryColor="#4c92d8"
+secondaryBackgroundColor="#363743"
+
+[logger]
+level = "info"
+messageFormat = "%(asctime)s %(message)s"
