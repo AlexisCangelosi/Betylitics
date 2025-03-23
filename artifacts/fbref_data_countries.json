@@ -1,590 +1,674 @@
 [
     {
         "Pays":"Clubs de football de Albania",
-        "Flag":"al",
+        "Flag":"🇦🇱",
         "Organe directeur":"UEFA",
         "# clubs":"17",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ALB\/Clubs-de-football-de-Albania"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ALB\/Clubs-de-football-de-Albania",
+        "Abbreviation":"AL"
     },
     {
         "Pays":"Clubs de football de Andorra",
-        "Flag":"ad",
+        "Flag":"🇦🇩",
         "Organe directeur":"UEFA",
         "# clubs":"11",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AND\/Clubs-de-football-de-Andorra"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AND\/Clubs-de-football-de-Andorra",
+        "Abbreviation":"AD"
     },
     {
         "Pays":"Clubs de football de Antigua and Barbuda",
-        "Flag":"ag",
+        "Flag":"🇦🇬",
         "Organe directeur":"CONCACAF",
         "# clubs":"1",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ATG\/Clubs-de-football-de-Antigua-and-Barbuda"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ATG\/Clubs-de-football-de-Antigua-and-Barbuda",
+        "Abbreviation":"AG"
     },
     {
         "Pays":"Clubs de football de Argentina",
-        "Flag":"ar",
+        "Flag":"🇦🇷",
         "Organe directeur":"CONMEBOL",
         "# clubs":"41",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ARG\/Clubs-de-football-de-Argentina"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ARG\/Clubs-de-football-de-Argentina",
+        "Abbreviation":"AR"
     },
     {
         "Pays":"Clubs de football de Armenia",
-        "Flag":"am",
+        "Flag":"🇦🇲",
         "Organe directeur":"UEFA",
         "# clubs":"16",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ARM\/Clubs-de-football-de-Armenia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ARM\/Clubs-de-football-de-Armenia",
+        "Abbreviation":"AM"
     },
     {
         "Pays":"Clubs de football de Australia",
-        "Flag":"au",
+        "Flag":"🇦🇺",
         "Organe directeur":"AFC",
         "# clubs":"24",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AUS\/Clubs-de-football-de-Australia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AUS\/Clubs-de-football-de-Australia",
+        "Abbreviation":"AU"
     },
     {
         "Pays":"Clubs de football de Austria",
-        "Flag":"at",
+        "Flag":"🇦🇹",
         "Organe directeur":"UEFA",
         "# clubs":"42",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AUT\/Clubs-de-football-de-Austria"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AUT\/Clubs-de-football-de-Austria",
+        "Abbreviation":"AT"
     },
     {
         "Pays":"Clubs de football de Azerbaijan",
-        "Flag":"az",
+        "Flag":"🇦🇿",
         "Organe directeur":"UEFA",
         "# clubs":"20",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AZE\/Clubs-de-football-de-Azerbaijan"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/AZE\/Clubs-de-football-de-Azerbaijan",
+        "Abbreviation":"AZ"
     },
     {
         "Pays":"Clubs de football de Belarus",
-        "Flag":"by",
+        "Flag":"🇧🇾",
         "Organe directeur":"UEFA",
         "# clubs":"18",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BLR\/Clubs-de-football-de-Belarus"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BLR\/Clubs-de-football-de-Belarus",
+        "Abbreviation":"BY"
     },
     {
         "Pays":"Clubs de football de Belgium",
-        "Flag":"be",
+        "Flag":"🇧🇪",
         "Organe directeur":"UEFA",
         "# clubs":"67",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BEL\/Clubs-de-football-de-Belgium"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BEL\/Clubs-de-football-de-Belgium",
+        "Abbreviation":"BE"
     },
     {
         "Pays":"Clubs de football de Bolivia",
-        "Flag":"bo",
+        "Flag":"🇧🇴",
         "Organe directeur":"CONMEBOL",
         "# clubs":"31",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BOL\/Clubs-de-football-de-Bolivia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BOL\/Clubs-de-football-de-Bolivia",
+        "Abbreviation":"BO"
     },
     {
         "Pays":"Clubs de football de Bosnia and Herzegovina",
-        "Flag":"ba",
+        "Flag":"🇧🇦",
         "Organe directeur":"UEFA",
         "# clubs":"18",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BIH\/Clubs-de-football-de-Bosnia-and-Herzegovina"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BIH\/Clubs-de-football-de-Bosnia-and-Herzegovina",
+        "Abbreviation":"BA"
     },
     {
         "Pays":"Clubs de football de Brazil",
-        "Flag":"br",
+        "Flag":"🇧🇷",
         "Organe directeur":"CONMEBOL",
         "# clubs":"100",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BRA\/Clubs-de-football-de-Brazil"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BRA\/Clubs-de-football-de-Brazil",
+        "Abbreviation":"BR"
     },
     {
         "Pays":"Clubs de football de Bulgaria",
-        "Flag":"bg",
+        "Flag":"🇧🇬",
         "Organe directeur":"UEFA",
         "# clubs":"47",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BUL\/Clubs-de-football-de-Bulgaria"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/BUL\/Clubs-de-football-de-Bulgaria",
+        "Abbreviation":"BG"
     },
     {
         "Pays":"Clubs de football de Canada",
-        "Flag":"ca",
+        "Flag":"🇨🇦",
         "Organe directeur":"CONCACAF",
         "# clubs":"21",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CAN\/Clubs-de-football-de-Canada"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CAN\/Clubs-de-football-de-Canada",
+        "Abbreviation":"CA"
     },
     {
         "Pays":"Clubs de football de Chile",
-        "Flag":"cl",
+        "Flag":"🇨🇱",
         "Organe directeur":"CONMEBOL",
         "# clubs":"28",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CHI\/Clubs-de-football-de-Chile"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CHI\/Clubs-de-football-de-Chile",
+        "Abbreviation":"CL"
     },
     {
         "Pays":"Clubs de football de China PR",
-        "Flag":"cn",
+        "Flag":"🇨🇭",
         "Organe directeur":"AFC",
         "# clubs":"34",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CHN\/Clubs-de-football-de-China-PR"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CHN\/Clubs-de-football-de-China-PR",
+        "Abbreviation":"CH"
     },
     {
         "Pays":"Clubs de football de Colombia",
-        "Flag":"co",
+        "Flag":"🇨🇴",
         "Organe directeur":"CONMEBOL",
         "# clubs":"29",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/COL\/Clubs-de-football-de-Colombia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/COL\/Clubs-de-football-de-Colombia",
+        "Abbreviation":"CO"
     },
     {
         "Pays":"Clubs de football de Croatia",
-        "Flag":"hr",
+        "Flag":"🇭🇷",
         "Organe directeur":"UEFA",
         "# clubs":"26",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CRO\/Clubs-de-football-de-Croatia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CRO\/Clubs-de-football-de-Croatia",
+        "Abbreviation":"HR"
     },
     {
         "Pays":"Clubs de football de Cyprus",
-        "Flag":"cy",
+        "Flag":"🇨🇾",
         "Organe directeur":"UEFA",
         "# clubs":"14",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CYP\/Clubs-de-football-de-Cyprus"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CYP\/Clubs-de-football-de-Cyprus",
+        "Abbreviation":"CY"
     },
     {
         "Pays":"Clubs de football de Czech Republic",
-        "Flag":"cz",
+        "Flag":"🇨🇿",
         "Organe directeur":"UEFA",
         "# clubs":"33",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CZE\/Clubs-de-football-de-Czech-Republic"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/CZE\/Clubs-de-football-de-Czech-Republic",
+        "Abbreviation":"CZ"
     },
     {
         "Pays":"Clubs de football de Denmark",
-        "Flag":"dk",
+        "Flag":"🇩🇰",
         "Organe directeur":"UEFA",
         "# clubs":"40",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/DEN\/Clubs-de-football-de-Denmark"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/DEN\/Clubs-de-football-de-Denmark",
+        "Abbreviation":"DK"
     },
     {
         "Pays":"Clubs de football de Ecuador",
-        "Flag":"ec",
+        "Flag":"🇪🇨",
         "Organe directeur":"CONMEBOL",
         "# clubs":"27",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ECU\/Clubs-de-football-de-Ecuador"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ECU\/Clubs-de-football-de-Ecuador",
+        "Abbreviation":"EC"
     },
     {
         "Pays":"Clubs de football de England",
-        "Flag":"eng",
+        "Flag":"🇬🇧",
         "Organe directeur":"UEFA",
         "# clubs":"1041",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ENG\/Clubs-de-football-de-England"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ENG\/Clubs-de-football-de-England",
+        "Abbreviation":"GB"
     },
     {
         "Pays":"Clubs de football de Estonia",
-        "Flag":"ee",
+        "Flag":"🇪🇪",
         "Organe directeur":"UEFA",
         "# clubs":"16",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/EST\/Clubs-de-football-de-Estonia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/EST\/Clubs-de-football-de-Estonia",
+        "Abbreviation":"EE"
     },
     {
         "Pays":"Clubs de football de Faroe Islands",
-        "Flag":"fo",
+        "Flag":"🇫🇴",
         "Organe directeur":"UEFA",
         "# clubs":"14",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/FRO\/Clubs-de-football-de-Faroe-Islands"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/FRO\/Clubs-de-football-de-Faroe-Islands",
+        "Abbreviation":"FO"
     },
     {
         "Pays":"Clubs de football de Finland",
-        "Flag":"fi",
+        "Flag":"🇫🇮",
         "Organe directeur":"UEFA",
         "# clubs":"39",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/FIN\/Clubs-de-football-de-Finland"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/FIN\/Clubs-de-football-de-Finland",
+        "Abbreviation":"FI"
     },
     {
         "Pays":"Clubs de football de France",
-        "Flag":"fr",
+        "Flag":"🇫🇷",
         "Organe directeur":"UEFA",
         "# clubs":"755",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/FRA\/Clubs-de-football-de-France"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/FRA\/Clubs-de-football-de-France",
+        "Abbreviation":"FR"
     },
     {
         "Pays":"Clubs de football de French Guiana",
-        "Flag":"gf",
+        "Flag":"🇬🇫",
         "Organe directeur":"CONCACAF",
         "# clubs":"5",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GUF\/Clubs-de-football-de-French-Guiana"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GUF\/Clubs-de-football-de-French-Guiana",
+        "Abbreviation":"GF"
     },
     {
         "Pays":"Clubs de football de Georgia",
-        "Flag":"ge",
+        "Flag":"🇬🇪",
         "Organe directeur":"UEFA",
         "# clubs":"23",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GEO\/Clubs-de-football-de-Georgia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GEO\/Clubs-de-football-de-Georgia",
+        "Abbreviation":"GE"
     },
     {
         "Pays":"Clubs de football de Germany",
-        "Flag":"de",
+        "Flag":"🇩🇪",
         "Organe directeur":"UEFA",
         "# clubs":"446",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GER\/Clubs-de-football-de-Germany"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GER\/Clubs-de-football-de-Germany",
+        "Abbreviation":"DE"
     },
     {
         "Pays":"Clubs de football de Gibraltar",
-        "Flag":"gi",
+        "Flag":"🇬🇮",
         "Organe directeur":"UEFA",
         "# clubs":"5",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GIB\/Clubs-de-football-de-Gibraltar"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GIB\/Clubs-de-football-de-Gibraltar",
+        "Abbreviation":"GI"
     },
     {
         "Pays":"Clubs de football de Great Britain",
-        "Flag":"gb",
+        "Flag":"🇬🇧",
         "Organe directeur":"Great Britain",
         "# clubs":"1",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GBR\/Clubs-de-football-de-Great-Britain"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GBR\/Clubs-de-football-de-Great-Britain",
+        "Abbreviation":"GB"
     },
     {
         "Pays":"Clubs de football de Greece",
-        "Flag":"gr",
+        "Flag":"🇬🇷",
         "Organe directeur":"UEFA",
         "# clubs":"46",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GRE\/Clubs-de-football-de-Greece"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GRE\/Clubs-de-football-de-Greece",
+        "Abbreviation":"GR"
     },
     {
         "Pays":"Clubs de football de Guadeloupe",
-        "Flag":"gp",
+        "Flag":"🇬🇵",
         "Organe directeur":"CONCACAF",
         "# clubs":"4",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GLP\/Clubs-de-football-de-Guadeloupe"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/GLP\/Clubs-de-football-de-Guadeloupe",
+        "Abbreviation":"GP"
     },
     {
         "Pays":"Clubs de football de Hungary",
-        "Flag":"hu",
+        "Flag":"🇭🇺",
         "Organe directeur":"UEFA",
         "# clubs":"36",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/HUN\/Clubs-de-football-de-Hungary"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/HUN\/Clubs-de-football-de-Hungary",
+        "Abbreviation":"HU"
     },
     {
         "Pays":"Clubs de football de Iceland",
-        "Flag":"is",
+        "Flag":"🇮🇸",
         "Organe directeur":"UEFA",
         "# clubs":"19",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ISL\/Clubs-de-football-de-Iceland"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ISL\/Clubs-de-football-de-Iceland",
+        "Abbreviation":"IS"
     },
     {
         "Pays":"Clubs de football de India",
-        "Flag":"in",
+        "Flag":"🇮🇳",
         "Organe directeur":"AFC",
         "# clubs":"42",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/IND\/Clubs-de-football-de-India"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/IND\/Clubs-de-football-de-India",
+        "Abbreviation":"IN"
     },
     {
         "Pays":"Clubs de football de IR Iran",
-        "Flag":"ir",
+        "Flag":"🇮🇷",
         "Organe directeur":"AFC",
         "# clubs":"33",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/IRN\/Clubs-de-football-de-Iran"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/IRN\/Clubs-de-football-de-Iran",
+        "Abbreviation":"IR"
     },
     {
         "Pays":"Clubs de football de Israel",
-        "Flag":"il",
+        "Flag":"🇮🇱",
         "Organe directeur":"UEFA",
         "# clubs":"17",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ISR\/Clubs-de-football-de-Israel"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ISR\/Clubs-de-football-de-Israel",
+        "Abbreviation":"IL"
     },
     {
         "Pays":"Clubs de football de Italy",
-        "Flag":"it",
+        "Flag":"🇮🇹",
         "Organe directeur":"UEFA",
         "# clubs":"180",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ITA\/Clubs-de-football-de-Italy"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ITA\/Clubs-de-football-de-Italy",
+        "Abbreviation":"IT"
     },
     {
         "Pays":"Clubs de football de Japan",
-        "Flag":"jp",
+        "Flag":"🇯🇵",
         "Organe directeur":"AFC",
         "# clubs":"64",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/JPN\/Clubs-de-football-de-Japan"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/JPN\/Clubs-de-football-de-Japan",
+        "Abbreviation":"JP"
     },
     {
         "Pays":"Clubs de football de Kazakhstan",
-        "Flag":"kz",
+        "Flag":"🇰🇿",
         "Organe directeur":"UEFA",
         "# clubs":"17",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KAZ\/Clubs-de-football-de-Kazakhstan"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KAZ\/Clubs-de-football-de-Kazakhstan",
+        "Abbreviation":"KZ"
     },
     {
         "Pays":"Clubs de football de Korea Republic",
-        "Flag":"kr",
+        "Flag":"🇰🇴",
         "Organe directeur":"AFC",
         "# clubs":"20",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KOR\/Clubs-de-football-de-Korea-Republic"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KOR\/Clubs-de-football-de-Korea-Republic",
+        "Abbreviation":"KO"
     },
     {
         "Pays":"Clubs de football de Kosovo",
-        "Flag":"xk",
+        "Flag":"🇷🇸",
         "Organe directeur":"UEFA",
         "# clubs":"10",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KVX\/Clubs-de-football-de-Kosovo"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KVX\/Clubs-de-football-de-Kosovo",
+        "Abbreviation":"RS"
     },
     {
         "Pays":"Clubs de football de Latvia",
-        "Flag":"lv",
+        "Flag":"🇱🇻",
         "Organe directeur":"UEFA",
         "# clubs":"19",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LVA\/Clubs-de-football-de-Latvia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LVA\/Clubs-de-football-de-Latvia",
+        "Abbreviation":"LV"
     },
     {
         "Pays":"Clubs de football de Liechtenstein",
-        "Flag":"li",
+        "Flag":"🇱🇮",
         "Organe directeur":"UEFA",
         "# clubs":"2",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LIE\/Clubs-de-football-de-Liechtenstein"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LIE\/Clubs-de-football-de-Liechtenstein",
+        "Abbreviation":"LI"
     },
     {
         "Pays":"Clubs de football de Lithuania",
-        "Flag":"lt",
+        "Flag":"🇱🇹",
         "Organe directeur":"UEFA",
         "# clubs":"20",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LTU\/Clubs-de-football-de-Lithuania"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LTU\/Clubs-de-football-de-Lithuania",
+        "Abbreviation":"LT"
     },
     {
         "Pays":"Clubs de football de Luxembourg",
-        "Flag":"lu",
+        "Flag":"🇱🇺",
         "Organe directeur":"UEFA",
         "# clubs":"20",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LUX\/Clubs-de-football-de-Luxembourg"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/LUX\/Clubs-de-football-de-Luxembourg",
+        "Abbreviation":"LU"
     },
     {
         "Pays":"Clubs de football de Malta",
-        "Flag":"mt",
+        "Flag":"🇲🇹",
         "Organe directeur":"UEFA",
         "# clubs":"13",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MLT\/Clubs-de-football-de-Malta"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MLT\/Clubs-de-football-de-Malta",
+        "Abbreviation":"MT"
     },
     {
         "Pays":"Clubs de football de Martinique",
-        "Flag":"mq",
+        "Flag":"🇲🇶",
         "Organe directeur":"CONCACAF",
         "# clubs":"2",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MTQ\/Clubs-de-football-de-Martinique"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MTQ\/Clubs-de-football-de-Martinique",
+        "Abbreviation":"MQ"
     },
     {
         "Pays":"Clubs de football de Mexico",
-        "Flag":"mx",
+        "Flag":"🇲🇽",
         "Organe directeur":"CONCACAF",
         "# clubs":"29",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MEX\/Clubs-de-football-de-Mexico"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MEX\/Clubs-de-football-de-Mexico",
+        "Abbreviation":"MX"
     },
     {
         "Pays":"Clubs de football de Moldova",
-        "Flag":"md",
+        "Flag":"🇲🇩",
         "Organe directeur":"UEFA",
         "# clubs":"20",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MDA\/Clubs-de-football-de-Moldova"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MDA\/Clubs-de-football-de-Moldova",
+        "Abbreviation":"MD"
     },
     {
         "Pays":"Clubs de football de Montenegro",
-        "Flag":"me",
+        "Flag":"🇲🇪",
         "Organe directeur":"UEFA",
         "# clubs":"17",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MNE\/Clubs-de-football-de-Montenegro"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MNE\/Clubs-de-football-de-Montenegro",
+        "Abbreviation":"ME"
     },
     {
         "Pays":"Clubs de football de Netherlands",
-        "Flag":"nl",
+        "Flag":"🇳🇱",
         "Organe directeur":"UEFA",
         "# clubs":"60",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NED\/Clubs-de-football-de-Netherlands"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NED\/Clubs-de-football-de-Netherlands",
+        "Abbreviation":"NL"
     },
     {
         "Pays":"Clubs de football de New Zealand",
-        "Flag":"nz",
+        "Flag":"🇳🇿",
         "Organe directeur":"OFC",
         "# clubs":"4",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NZL\/Clubs-de-football-de-New-Zealand"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NZL\/Clubs-de-football-de-New-Zealand",
+        "Abbreviation":"NZ"
     },
     {
         "Pays":"Clubs de football de North Macedonia",
-        "Flag":"mk",
+        "Flag":"🇲🇰",
         "Organe directeur":"UEFA",
         "# clubs":"25",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MKD\/Clubs-de-football-de-North-Macedonia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/MKD\/Clubs-de-football-de-North-Macedonia",
+        "Abbreviation":"MK"
     },
     {
         "Pays":"Clubs de football de Northern Ireland",
-        "Flag":"nir",
+        "Flag":"🇬🇧",
         "Organe directeur":"UEFA",
         "# clubs":"16",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NIR\/Clubs-de-football-de-Northern-Ireland"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NIR\/Clubs-de-football-de-Northern-Ireland",
+        "Abbreviation":"GB"
     },
     {
         "Pays":"Clubs de football de Norway",
-        "Flag":"no",
+        "Flag":"🇳🇴",
         "Organe directeur":"UEFA",
         "# clubs":"53",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NOR\/Clubs-de-football-de-Norway"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/NOR\/Clubs-de-football-de-Norway",
+        "Abbreviation":"NO"
     },
     {
         "Pays":"Clubs de football de Paraguay",
-        "Flag":"py",
+        "Flag":"🇵🇾",
         "Organe directeur":"CONMEBOL",
         "# clubs":"27",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/PAR\/Clubs-de-football-de-Paraguay"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/PAR\/Clubs-de-football-de-Paraguay",
+        "Abbreviation":"PY"
     },
     {
         "Pays":"Clubs de football de Peru",
-        "Flag":"pe",
+        "Flag":"🇵🇪",
         "Organe directeur":"CONMEBOL",
         "# clubs":"35",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/PER\/Clubs-de-football-de-Peru"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/PER\/Clubs-de-football-de-Peru",
+        "Abbreviation":"PE"
     },
     {
         "Pays":"Clubs de football de Poland",
-        "Flag":"pl",
+        "Flag":"🇵🇱",
         "Organe directeur":"UEFA",
         "# clubs":"49",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/POL\/Clubs-de-football-de-Poland"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/POL\/Clubs-de-football-de-Poland",
+        "Abbreviation":"PL"
     },
     {
         "Pays":"Clubs de football de Portugal",
-        "Flag":"pt",
+        "Flag":"🇵🇹",
         "Organe directeur":"UEFA",
         "# clubs":"47",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/POR\/Clubs-de-football-de-Portugal"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/POR\/Clubs-de-football-de-Portugal",
+        "Abbreviation":"PT"
     },
     {
         "Pays":"Clubs de football de Puerto Rico",
-        "Flag":"pr",
+        "Flag":"🇵🇷",
         "Organe directeur":"CONCACAF",
         "# clubs":"2",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/PUR\/Clubs-de-football-de-Puerto-Rico"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/PUR\/Clubs-de-football-de-Puerto-Rico",
+        "Abbreviation":"PR"
     },
     {
         "Pays":"Clubs de football de Republic of Ireland",
-        "Flag":"ie",
+        "Flag":"🇷🇪",
         "Organe directeur":"UEFA",
         "# clubs":"17",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/IRL\/Clubs-de-football-de-Republic-of-Ireland"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/IRL\/Clubs-de-football-de-Republic-of-Ireland",
+        "Abbreviation":"RE"
     },
     {
         "Pays":"Clubs de football de Réunion",
-        "Flag":"re",
+        "Flag":"🇷🇪",
         "Organe directeur":"CAF",
         "# clubs":"4",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/REU\/Clubs-de-football-de-Reunion"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/REU\/Clubs-de-football-de-Reunion",
+        "Abbreviation":"RE"
     },
     {
         "Pays":"Clubs de football de Romania",
-        "Flag":"ro",
+        "Flag":"🇷🇴",
         "Organe directeur":"UEFA",
         "# clubs":"54",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ROU\/Clubs-de-football-de-Romania"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ROU\/Clubs-de-football-de-Romania",
+        "Abbreviation":"RO"
     },
     {
         "Pays":"Clubs de football de Russia",
-        "Flag":"ru",
+        "Flag":"🇷🇺",
         "Organe directeur":"UEFA",
         "# clubs":"53",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/RUS\/Clubs-de-football-de-Russia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/RUS\/Clubs-de-football-de-Russia",
+        "Abbreviation":"RU"
     },
     {
         "Pays":"Clubs de football de San Marino",
-        "Flag":"sm",
+        "Flag":"🇸🇲",
         "Organe directeur":"UEFA",
         "# clubs":"13",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SMR\/Clubs-de-football-de-San-Marino"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SMR\/Clubs-de-football-de-San-Marino",
+        "Abbreviation":"SM"
     },
     {
         "Pays":"Clubs de football de Saudi Arabia",
-        "Flag":"sa",
+        "Flag":"🇸🇦",
         "Organe directeur":"AFC",
         "# clubs":"28",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KSA\/Clubs-de-football-de-Saudi-Arabia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/KSA\/Clubs-de-football-de-Saudi-Arabia",
+        "Abbreviation":"SA"
     },
     {
         "Pays":"Clubs de football de Scotland",
-        "Flag":"sct",
+        "Flag":"🇬🇧",
         "Organe directeur":"UEFA",
         "# clubs":"41",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SCO\/Clubs-de-football-de-Scotland"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SCO\/Clubs-de-football-de-Scotland",
+        "Abbreviation":"GB"
     },
     {
         "Pays":"Clubs de football de Serbia",
-        "Flag":"rs",
+        "Flag":"🇷🇸",
         "Organe directeur":"UEFA",
         "# clubs":"47",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SRB\/Clubs-de-football-de-Serbia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SRB\/Clubs-de-football-de-Serbia",
+        "Abbreviation":"RS"
     },
     {
         "Pays":"Clubs de football de Slovakia",
-        "Flag":"sk",
+        "Flag":"🇸🇰",
         "Organe directeur":"UEFA",
         "# clubs":"20",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SVK\/Clubs-de-football-de-Slovakia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SVK\/Clubs-de-football-de-Slovakia",
+        "Abbreviation":"SK"
     },
     {
         "Pays":"Clubs de football de Slovenia",
-        "Flag":"si",
+        "Flag":"🇸🇮",
         "Organe directeur":"UEFA",
         "# clubs":"16",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SVN\/Clubs-de-football-de-Slovenia"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SVN\/Clubs-de-football-de-Slovenia",
+        "Abbreviation":"SI"
     },
     {
         "Pays":"Clubs de football de South Africa",
-        "Flag":"za",
+        "Flag":"🇿🇦",
         "Organe directeur":"CAF",
         "# clubs":"33",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/RSA\/Clubs-de-football-de-South-Africa"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/RSA\/Clubs-de-football-de-South-Africa",
+        "Abbreviation":"ZA"
     },
     {
         "Pays":"Clubs de football de Spain",
-        "Flag":"es",
+        "Flag":"🇪🇸",
         "Organe directeur":"UEFA",
         "# clubs":"371",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ESP\/Clubs-de-football-de-Spain"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/ESP\/Clubs-de-football-de-Spain",
+        "Abbreviation":"ES"
     },
     {
         "Pays":"Clubs de football de Sweden",
-        "Flag":"se",
+        "Flag":"🇸🇪",
         "Organe directeur":"UEFA",
         "# clubs":"80",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SWE\/Clubs-de-football-de-Sweden"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SWE\/Clubs-de-football-de-Sweden",
+        "Abbreviation":"SE"
     },
     {
         "Pays":"Clubs de football de Switzerland",
-        "Flag":"ch",
+        "Flag":"🇨🇭",
         "Organe directeur":"UEFA",
         "# clubs":"32",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SUI\/Clubs-de-football-de-Switzerland"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/SUI\/Clubs-de-football-de-Switzerland",
+        "Abbreviation":"CH"
     },
     {
         "Pays":"Clubs de football de Türkiye",
-        "Flag":"tr",
+        "Flag":"🇹🇷",
         "Organe directeur":"UEFA",
         "# clubs":"56",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/TUR\/Clubs-de-football-de-Turkey"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/TUR\/Clubs-de-football-de-Turkey",
+        "Abbreviation":"TR"
     },
     {
         "Pays":"Clubs de football de Ukraine",
-        "Flag":"ua",
+        "Flag":"🇺🇦",
         "Organe directeur":"UEFA",
         "# clubs":"46",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/UKR\/Clubs-de-football-de-Ukraine"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/UKR\/Clubs-de-football-de-Ukraine",
+        "Abbreviation":"UA"
     },
     {
         "Pays":"Clubs de football de United States",
-        "Flag":"us",
+        "Flag":"🇺🇸",
         "Organe directeur":"CONCACAF",
         "# clubs":"289",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/USA\/Clubs-de-football-de-United-States"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/USA\/Clubs-de-football-de-United-States",
+        "Abbreviation":"US"
     },
     {
         "Pays":"Clubs de football de Uruguay",
-        "Flag":"uy",
+        "Flag":"🇺🇾",
         "Organe directeur":"CONMEBOL",
         "# clubs":"29",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/URU\/Clubs-de-football-de-Uruguay"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/URU\/Clubs-de-football-de-Uruguay",
+        "Abbreviation":"UY"
     },
     {
         "Pays":"Clubs de football de Venezuela",
-        "Flag":"ve",
+        "Flag":"🇻🇪",
         "Organe directeur":"CONMEBOL",
         "# clubs":"32",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/VEN\/Clubs-de-football-de-Venezuela"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/VEN\/Clubs-de-football-de-Venezuela",
+        "Abbreviation":"VE"
     },
     {
         "Pays":"Clubs de football de Wales",
-        "Flag":"wls",
+        "Flag":"🇬🇧",
         "Organe directeur":"UEFA",
         "# clubs":"23",
-        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/WAL\/Clubs-de-football-de-Wales"
+        "Link":"https:\/\/fbref.com\/fr\/pays\/clubs\/WAL\/Clubs-de-football-de-Wales",
+        "Abbreviation":"GB"
     }
 ]

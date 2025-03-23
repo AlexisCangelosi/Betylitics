@@ -89,7 +89,7 @@ def safe_get(url, retries=3, initial_delay=5):
             response.raise_for_status()
             print_success(f"Successfully fetched {url}")
             
-            sleep_time = random.uniform(2, 4)
+            sleep_time = random.uniform(0, 2)
             if st:
                 with st.spinner(f"Waiting for {sleep_time:.1f} seconds to avoid rate limits...", show_time=True):
                     time.sleep(sleep_time)

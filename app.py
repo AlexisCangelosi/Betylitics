@@ -6,6 +6,7 @@ import time
 import re
 from datetime import datetime
 from streamlit_option_menu import option_menu
+from st_ant_tree import st_ant_tree
 from scripts.controler.get_team_data import fetch_fbref_stats
 from scripts.controler.get_players_data import update_fbref_players_data
 from scripts.controler.get_h2h_data import get_h2h_data
@@ -25,6 +26,9 @@ with open("artifacts/fbref_matches.json", "r", encoding="utf-8") as f2:
 
 with open("artifacts/fbref_stats.json", "r", encoding="utf-8") as f3:
     infos = json.load(f3)
+
+with open("artifacts/fbref_data_countries.json", "r", encoding="utf-8") as f4:
+    data_country = json.load(f4)
 
 # Extraire et trier les pays : ceux avec Featured=true en premier.
 featured_countries = [country for country, details in data.items() if details.get("Featured", False)]
@@ -220,10 +224,15 @@ with st.sidebar:
             sorted_matches = sorted(st.session_state.matches, key=lambda m: m.get("Heure", "00:00"))
             match_options = []
             match_mapping = {}
+            flag = ""
+
             for m in sorted_matches:
+                for data in data_country:
+                    if m.get('Country') in data["Abbreviation"]:
+                        flag = data['Flag']
                 display_str = (
-                    f"{m.get('Country', 'Unknown')}/{m.get('Tour', 'Unknown')} - "
-                    f"{m.get('Domicile', 'N/A')} vs {m.get('Extérieur', 'N/A')} ({m.get('Heure', 'N/A')})"
+                    f"{flag} {m.get('Tour', 'Unknown')} → "
+                    f"{m.get('Domicile', 'N/A')} 🆚 {m.get('Extérieur', 'N/A')}"
                 )
                 match_options.append(display_str)
                 match_mapping[display_str] = m
@@ -289,7 +298,7 @@ with st.sidebar:
         reset_json_files()
     # Assume this timestamp is when your data was last updated.
     # For example, here we simulate it with a timestamp from one hour ago.
-    last_updated_str = "2025-03-22 02:49"  # Replace this with your actual update time
+    last_updated_str = "2025-03-23 01:48"  # Replace this with your actual update time
     # For demonstration, we subtract 1 hour:
     last_updated = datetime.strptime(last_updated_str, "%Y-%m-%d %H:%M")
 
@@ -305,13 +314,24 @@ with st.sidebar:
     else:
         update_message = f"🗘 {minutes_ago} minute{'s' if minutes_ago > 1 else ''} ago"
 
-    st.caption(f"⚙️ v1.0.0-20250322.cc18 - {update_message}")
+    st.caption(f"⚙️ v1.0.0-20250323.2832 - {update_message}")
 
 # --- Menu principal via option_menu ---
+# Recharger les infos après analyse (vous pouvez déclencher ce rechargement via une condition ou un bouton)
+with open("artifacts/fbref_stats.json", "r", encoding="utf-8") as f3:
+    infos = json.load(f3)
+    
 datasets = infos.get("datasets", [])
 team_names = [extract_team_name(ds.get("team", "Unknown")) for ds in datasets]
+logo = [extract_team_name(ds.get("team_logo_url", "Unknown")) for ds in datasets]
 if len(team_names) >= 2:
-        st.subheader(f"{team_names[0]} vs {team_names[1]}")
+        st.markdown(f"""
+<div style=\"text-align: center; font-size: 20px;\">
+    <img src=\"{logo[0]}\" alt=\"Team Logo\" style=\"width:35px; height:35px; border-radius:50%;\">
+    {team_names[0]} vs {team_names[1]}
+    <img src=\"{logo[1]}\" alt=\"Team Logo\" style=\"width:35px; height:35px; border-radius:50%;\">
+</div>
+""", unsafe_allow_html=True)
 
 selected_main = option_menu(
     menu_title=None,

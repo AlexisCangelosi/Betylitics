@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import json
 import difflib
 import re
@@ -72,6 +73,22 @@ def parse_scorebox_list(team_list):
                 # Convert numeric values to integers if possible
                 stats[key] = int(value) if isinstance(value, str) and value.isdigit() else value
     return stats
+
+def extract_team_name(team_str: str) -> str:
+    """
+    Extracts the team name from a full string.
+    Expected format:
+      "Statistiques YYYY-YYYY TEAM_NAME(Ligue ...)"
+    Returns the TEAM_NAME part, e.g., "Strasbourg" or "Lyon".
+    """
+    match = re.search(r"Statistiques\s+\d{4}-\d{4}\s+([^(]+)", team_str)
+    if match:
+        return match.group(1).strip()
+    # Fallback: remove the "Statistiques" prefix and anything in parentheses.
+    team_str = team_str.replace("Statistiques", "").strip()
+    if "(" in team_str:
+        team_str = team_str.split("(")[0].strip()
+    return team_str
 
 def extract_match_teams(report_url: str, scorebox_home: str, scorebox_away: str):
     """
@@ -291,22 +308,13 @@ def get_color_from_percentage(value):
     Compute a HEX color based on a percentage value using multiple stops.
     
     Stops:
-        0%   -> muted red (#993333)
-        25%  -> muted orange (#CC6633)
-        50%  -> muted amber (#E69933)
-        75%  -> muted lime green (#669933)
-        100% -> muted dark green (#336633)
-    
-    Parameters:
-        value (float): Percentage value between 0 and 100.
-        
-    Returns:
-        str: HEX color code.
+      0%   -> #993333 (rouge)
+      25%  -> #CC6633 (orange)
+      50%  -> #E69933 (ambre)
+      75%  -> #669933 (lime)
+      100% -> #336633 (vert)
     """
-    # Clamp value between 0 and 100
     value = max(0, min(100, value))
-    
-    # Define the stops as a list of tuples (percentage, (R, G, B))
     stops = [
         (0, (153, 51, 51)),    # #993333
         (25, (204, 102, 51)),  # #CC6633
@@ -314,20 +322,322 @@ def get_color_from_percentage(value):
         (75, (102, 153, 51)),  # #669933
         (100, (51, 102, 51))   # #336633
     ]
-    
-    # Find the two stops between which the value lies
     for i in range(len(stops) - 1):
         lower_perc, lower_color = stops[i]
         upper_perc, upper_color = stops[i+1]
         if lower_perc <= value <= upper_perc:
-            # Compute interpolation factor
             t = (value - lower_perc) / (upper_perc - lower_perc)
             r = lower_color[0] + t * (upper_color[0] - lower_color[0])
             g = lower_color[1] + t * (upper_color[1] - lower_color[1])
             b = lower_color[2] + t * (upper_color[2] - lower_color[2])
             return f"#{int(r):02X}{int(g):02X}{int(b):02X}"
-    # In case value is exactly 100%
     return f"#{stops[-1][1][0]:02X}{stops[-1][1][1]:02X}{stops[-1][1][2]:02X}"
+
+
+def get_gradient_from_percentage(value):
+    """
+    Returns a CSS linear gradient string based on the given percentage.
+    La première couleur correspond au pourcentage donné, la deuxième à (value+5), 
+    ce qui crée un léger dégradé.
+    """
+    color1 = get_color_from_percentage(value)
+    color2 = get_color_from_percentage(min(value + 25, 100))
+    return f"linear-gradient(135deg, {color1} 0%, {color2} 100%)"
+
+# -----------------------------------------------
+# CSS personnalisé pour les cards et metrics
+# -----------------------------------------------
+def display_data(matches, home_team_name,away_team_name,logo):
+    home_win = draw = away_win = 0
+    home_goal = away_goal = 0
+    btts = 0
+    over15 = 0
+    over25 = 0
+
+    for m in matches:
+        home_score, away_score = parse_score(m.get("Score", ""))
+        if home_score is None or away_score is None:
+            continue
+        if home_score > away_score:
+            home_win += 1
+        elif home_score < away_score:
+            away_win += 1
+        else:
+            draw += 1
+        
+        if home_score > 0 and away_score > 0:
+            btts += 1
+        if home_score + away_score >= 2:
+            over15 += 1
+        if home_score + away_score >= 3:
+            over25 += 1
+
+        home_goal += home_score
+        away_goal += away_score
+    
+    total_games = len(matches)
+    home_win_pct = home_win / total_games
+    draw_pct = draw / total_games
+    away_win_pct = away_win / total_games
+    
+    btts_pct = btts / len(matches)
+    over15_pct = over15 / len(matches)
+    over25_pct = over25 / len(matches)
+
+    btts_pct = btts / len(matches)
+    over15_pct = over15 / len(matches)
+    over25_pct = over25 / len(matches)
+
+    st.markdown(
+        """
+        <style>
+        body {
+        margin: 0;
+        padding: 20px;
+        background: #333; /* Couleur de fond sombre */
+        }
+
+        .stats-container {
+        display: flex;
+        width: 100%;             /* Occupe toute la largeur disponible */
+        gap: 20px;
+        justify-content: center;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        }
+
+        /* Boîte principale avec layout horizontal */
+        .stat-box {
+        flex: 1;
+        position: relative;
+        min-height: 60px;
+        border-radius: 8px;
+        color: #fff;
+        padding: 8px 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;           /* Layout horizontal */
+        justify-content: space-between; /* Espace entre la partie gauche et droite */
+        align-items: center;            /* Alignement vertical centré */
+        }
+
+        /* Conteneur pour le label et la valeur à gauche */
+        .stat-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        }
+
+        /* Label du haut */
+        .stat-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+        font-weight: bold;
+        }
+
+        /* Valeur principale */
+        .stat-value {
+        font-size: 17px;
+        font-weight: bold;
+        padding-left: 2px;
+        }
+
+        /* Bloc pour la sous-métrique affiché à droite */
+        .stat-sub {
+        font-size: 16px;
+        line-height: 1.2;
+        color: #fff;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.3);
+        padding: 5px 5px;
+        border-radius: 5px;
+        /* Pour s'assurer que le bloc occupe un minimum d'espace */
+        min-width: 40px;
+        text-align: center;
+        }
+
+        /* Couleurs fixes pour certaines boxes */
+        .box1 { 
+        background: linear-gradient(135deg, #24C6DC 0%, #514A9D 100%);
+        }
+        .box_win { 
+        background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);
+        }
+        .box_draw { 
+        background: linear-gradient(135deg, #f09819 0%, #ff512f 100%);
+        }
+        .box_lose { 
+        background: linear-gradient(135deg, #ff512f 0%, #cc0000 100%);
+        }
+
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    if home_win_pct > away_win_pct:
+        col1_bg_color = "box_win"
+        col2_bg_color = "box_lose"
+    elif home_win_pct < away_win_pct:
+        col2_bg_color = "box_win"
+        col1_bg_color = "box_lose"
+    else:
+        col2_bg_color = "box1"
+        col1_bg_color = "box1"
+
+
+    # Example metric display with a centered title above the metric value.
+    # Example metric display with a centered title above the metric value.
+    col1, col2, col3 = st.columns([5,2,5])
+    col2.markdown(
+        f"""
+        <div class="stats-container box1">
+            <div class="stat-box">
+                <div class="stat-left">
+                <div class="stat-label">
+                    Matches played
+                </div>
+                </div>
+                <div class="stat-sub">
+                {len(matches)}
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
+    col2.markdown(
+        f"""
+        <div class="stats-container {col1_bg_color}">
+            <div class="stat-box">
+                <div class="stat-left">
+                <div class="stat-label">
+                    <img src="{logo[0]}" alt="Team Logo" style="width:20px; height:20px; border-radius:50%;"> {home_team_name} won
+                </div>
+                <div class="stat-value">
+                    {home_win_pct * 100:.0f}%
+                </div>
+                </div>
+                <div class="stat-sub">
+                ⚽ Scored → {home_goal}<br>
+                📈 Avg → {(home_goal / len(matches)):.2f}
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    col3.markdown(
+        f"""
+        <div class="stats-container box_draw">
+            <div class="stat-box">
+                <div class="stat-label">
+                    <div class="stat-label">Draw</div>
+                <div class="stat-value-container">
+                    <div class="stat-value">{draw_pct * 100:.0f}%</div>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    col4.markdown(
+        f"""
+        <div class="stats-container {col2_bg_color}">
+            <div class="stat-box">
+                <div class="stat-left">
+                <div class="stat-label">
+                    <img src="{logo[1]}" alt="Team Logo" style="width:20px; height:20px; border-radius:50%;"> {away_team_name} won
+                </div>
+                <div class="stat-value">
+                    {away_win_pct * 100:.0f}%
+                </div>
+                </div>
+                <div class="stat-sub">
+                ⚽ Scored → {away_goal}<br>
+                📈 Avg → {(away_goal / len(matches)):.2f}
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
+    col2.markdown(
+        f"""
+        <div class="stats-container" style="background: {get_gradient_from_percentage(btts_pct * 100)}">
+            <div class="stat-box">
+                <div class="stat-left">
+                <div class="stat-label">
+                    BTTS
+                </div>
+                </div>
+                <div class="stat-sub">
+                {btts_pct* 100:.0f}%
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    col3.markdown(
+        f"""
+        <div class="stats-container" style="background: {get_gradient_from_percentage((1 - btts_pct) * 100)}">
+            <div class="stat-box">
+                <div class="stat-left">
+                <div class="stat-label">
+                    OTS
+                </div>
+                </div>
+                <div class="stat-sub">
+                    {(1-btts_pct)* 100:.0f}%
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    col4.markdown(
+        f"""
+        <div class="stats-container" style="background: {get_gradient_from_percentage(over15_pct * 100)}">
+            <div class="stat-box">
+                <div class="stat-left">
+                <div class="stat-label">
+                    Over 1,5
+                </div>
+                </div>
+                <div class="stat-sub">
+                    {over15_pct * 100:.0f}%
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    col5.markdown(
+        f"""
+        <div class="stats-container" style="background: {get_gradient_from_percentage(over25_pct * 100)}">
+            <div class="stat-box">
+                <div class="stat-left">
+                <div class="stat-label">
+                    Over 2,5
+                </div>
+                </div>
+                <div class="stat-sub">
+                    {over25_pct * 100:.0f}%
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    st.caption(get_legend_html(), unsafe_allow_html=True)
+    display_match_table(matches)
 
 def head_to_head_section():
     """
@@ -335,6 +645,12 @@ def head_to_head_section():
     computes metrics, and displays the information across three tabs: All Matches, Home Matches, and Away Matches.
     """
     # Load JSON file
+    with open("artifacts/fbref_stats.json", "r", encoding="utf-8") as f3:
+        infos = json.load(f3)
+        
+    datasets = infos.get("datasets", [])
+    logo = [extract_team_name(ds.get("team_logo_url", "Unknown")) for ds in datasets]
+
     try:
         with open("artifacts/fbref_h2h.json", "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -364,12 +680,22 @@ def head_to_head_section():
 
     # Création de deux colonnes
     col1, col2,col3 = st.columns([3,6,3])
-
     # Dans la première colonne, on place les pills pour la sélection "All", "Home", "Away"
     with col1:
-        options_team = ["All", "Home", "Away"]
-        selection2 = st.pills("View", options_team, selection_mode="single", default="All", label_visibility="collapsed")
-
+        option_map = {
+            "All": "💯",
+            "Home": "🏠",
+            "Away": "✈️"
+        }
+        selection2 = st.pills(
+            label="View",
+            options=list(option_map.keys()),
+            format_func=lambda option: option_map[option],
+            selection_mode="single",
+            default="All",  # Option par défaut
+            label_visibility="collapsed"
+        )
+    
     # Dans la deuxième colonne, on place les pills pour la sélection du nombre de matches
     with col3:
         options_count = ["All", "Last 6", "Last 10"]
@@ -383,537 +709,20 @@ def head_to_head_section():
         filtered_matches = [m for m in matches if m.get("Score", "").strip() != ""]
         matches = filtered_matches[:10]
 
-
-    # Extract win/draw/loss statistics from home stats (keys might be in French)
-    home_win = 0
-    draw = 0
-    away_win = 0
-
-    home_goal = away_goal = 0
-
-    btts = 0
-    over15 = 0
-    over25 = 0
-    for m in filtered_matches:
-        home_score, away_score = parse_score(m.get("Score", ""))
-        if home_score is None or away_score is None:
-            continue
-        if home_score > 0 and away_score > 0:
-            btts += 1
-        if home_score + away_score >= 2:
-            over15 += 1
-        if home_score + away_score >= 3:
-            over25 += 1
-
-        full_team_name = get_closest_team_name(m["Domicile"], teams_name)
-
-        if home_team_name == full_team_name:
-            home_goal += home_score
-            away_goal += away_score
-            if home_score > away_score:
-                home_win += 1
-            elif home_score < away_score:
-                away_win += 1
-            else:
-                draw += 1
-        else:
-            home_goal += away_score
-            away_goal += home_score
-            if home_score < away_score:
-                home_win += 1
-            elif home_score > away_score:
-                away_win += 1
-            else:
-                draw += 1
-
-    total_games = len(filtered_matches)
-    home_win_pct = home_win / total_games
-    draw_pct = draw / total_games
-    away_win_pct = away_win / total_games
-    
-    btts_pct = btts / len(matches)
-    over15_pct = over15 / len(matches)
-    over25_pct = over25 / len(matches)
-    
-    # Custom CSS for the metric component
-    st.markdown(
-        """
-        <style>
-        .metric-container2 {
-            padding: 5px;
-            border-radius: 10px; /* Rounded corners */
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            border: 1px solid white; /* White border, thin */
-            margin-bottom: 10px;
-        }
-        /* New container for title and value arranged vertically */
-        .metric-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        /* Title styling */
-        .metric-title2 {
-            font-size: 13px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 2px; /* Spacing between title and value */
-        }
-        .metric-value {
-            font-size: 36px;
-            font-weight: bold;
-            color: white;
-        }
-        .metric-value2 {
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-        }
-        .metric-delta {
-            font-size: 18px;
-            color: red;
-        }
-        .metric-sub {
-            font-size: 14px;
-            color: white;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
     if selection2 == "All":
-        if home_win_pct > away_win_pct:
-            col1_bg_color = "#009933"
-            col2_bg_color = "#cc0000"
-        else:
-            col2_bg_color = "#009933"
-            col1_bg_color = "#cc0000"
-
-        # Example metric display with a centered title above the metric value.
-        col1, col2, col3 = st.columns([5,2,5])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: #3d85c6">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Matches played</div>
-                    <div class="metric-value2">{len(filtered_matches)}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {col1_bg_color}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">{home_team_name} won</div>
-                    <div class="metric-value2">{home_win_pct * 100:.0f}%</div>
-                </div>
-                <div>
-                    <div class="metric-sub">⚽ Scored: {home_goal}<br>📈 Avg: {(home_goal / len(matches)):.2f}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col3.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: #ff9900">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Draw</div>
-                    <div class="metric-value2">{draw_pct * 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col4.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {col2_bg_color}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">{away_team_name} won</div>
-                    <div class="metric-value2">{away_win_pct * 100:.0f}%</div>
-                </div>
-                <div>
-                    <div class="metric-sub">⚽ Scored: {away_goal}<br>📈 Avg: {(away_goal / len(matches)):.2f}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">BTTS</div>
-                    <div class="metric-value2">{btts_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col3.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">OTS</div>
-                    <div class="metric-value2">{(1 - btts_pct)* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col4.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Over 1,5</div>
-                    <div class="metric-value2">{over15_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col5.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Over 2,5</div>
-                    <div class="metric-value2">{over25_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        
-        st.caption(get_legend_html(), unsafe_allow_html=True)
-        display_match_table(matches)
-
+        display_data(matches,home_team_name,away_team_name,logo)
     elif selection2 == "Home":
-        # Filter matches for home team based on extracted team names
-        home_matches = [m for m in matches if is_home_match(m, home_team_name, away_team_name)]
-
-        h_home_win = h_draw = h_away_win = 0
-        h_home_goal = h_away_goal = 0
-        btts = 0
-        over15 = 0
-        over25 = 0
-
-        for m in home_matches:
-            home_score, away_score = parse_score(m.get("Score", ""))
-            if home_score is None or away_score is None:
-                continue
-            if home_score > away_score:
-                h_home_win += 1
-            elif home_score < away_score:
-                h_away_win += 1
-            else:
-                h_draw += 1
-            
-            if home_score > 0 and away_score > 0:
-                btts += 1
-            if home_score + away_score >= 2:
-                over15 += 1
-            if home_score + away_score >= 3:
-                over25 += 1
-
-            h_home_goal += home_score
-            h_away_goal += away_score
-
-        btts_pct   = btts / len(home_matches)
-        over15_pct = over15 / len(home_matches)
-        over25_pct = over25 / len(home_matches)
-
-        if home_win_pct > away_win_pct:
-            col1_bg_color = "#009933"
-            col2_bg_color = "#cc0000"
-        else:
-            col2_bg_color = "#009933"
-            col1_bg_color = "#cc0000"
-
-        # Example metric display with a centered title above the metric value.
-        col1, col2, col3 = st.columns([5,2,5])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: #3d85c6">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Matches played</div>
-                    <div class="metric-value2">{len(home_matches)}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {col1_bg_color}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">{home_team_name} won</div>
-                    <div class="metric-value2">{(h_home_win / len(home_matches)) * 100:.0f}%</div>
-                </div>
-                <div>
-                    <div class="metric-sub">Goals: {h_home_goal}<br>Moy. {(h_home_goal / len(home_matches)):.2f}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col3.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: #ff9900">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Draw</div>
-                    <div class="metric-value2">{(h_draw / len(home_matches)) * 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col4.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {col2_bg_color}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">{away_team_name} won</div>
-                    <div class="metric-value2">{(h_away_win / len(home_matches)) * 100:.0f}%</div>
-                </div>
-                <div>
-                    <div class="metric-sub">Goals: {h_away_goal}<br>Moy. {(h_away_goal / len(home_matches)):.2f}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">BTTS</div>
-                    <div class="metric-value2">{btts_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col3.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">OTS</div>
-                    <div class="metric-value2">{(1 - btts_pct)* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col4.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Over 1,5</div>
-                    <div class="metric-value2">{over15_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col5.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Over 2,5</div>
-                    <div class="metric-value2">{over25_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        st.caption(get_legend_html(), unsafe_allow_html=True)
-        display_match_table(home_matches)
+        matches = [m for m in matches if is_home_match(m, home_team_name, away_team_name)]
+        display_data(matches,home_team_name,away_team_name,logo)
 
     elif selection2 == "Away":
-        # Filter matches for away team based on extracted team names
-        away_matches = [m for m in matches if is_away_match(m, home_team_name, away_team_name)]
-
-        a_home_win = a_draw = a_away_win = 0
-        a_home_goal = a_away_goal = 0
-        btts = 0
-        over15 = 0
-        over25 = 0
-
-        for m in away_matches:
-            home_score, away_score = parse_score(m.get("Score", ""))
-            if home_score is None or away_score is None:
-                continue
-            if home_score > away_score:
-                a_home_win += 1
-            elif home_score < away_score:
-                a_away_win += 1
-            else:
-                a_draw += 1
-            
-            if home_score > 0 and away_score > 0:
-                btts += 1
-            if home_score + away_score >= 2:
-                over15 += 1
-            if home_score + away_score >= 3:
-                over25 += 1
-
-            a_home_goal += home_score
-            a_away_goal += away_score
-
-        btts_pct = btts / len(away_matches)
-        over15_pct = over15 / len(away_matches)
-        over25_pct = over25 / len(away_matches)
-
-        if home_win_pct > away_win_pct:
-            col1_bg_color = "#009933"
-            col2_bg_color = "#cc0000"
-        else:
-            col2_bg_color = "#009933"
-            col1_bg_color = "#cc0000"
-
-        # Example metric display with a centered title above the metric value.
-        col1, col2, col3 = st.columns([5,2,5])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: #3d85c6">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Matches played</div>
-                    <div class="metric-value2">{len(away_matches)}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col1, col2,col3,col4,col5 = st.columns([2,3,1,3,2])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {col1_bg_color}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">{home_team_name} won</div>
-                    <div class="metric-value2">{(a_away_win / len(away_matches)) * 100:.0f}%</div>
-                </div>
-                <div>
-                    <div class="metric-sub">Goals: {a_away_goal}<br>Moy. {(a_away_goal / len(away_matches)):.2f}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col3.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: #ff9900">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Draw</div>
-                    <div class="metric-value2">{(a_draw / len(away_matches)) * 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col4.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {col2_bg_color}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">{away_team_name} won</div>
-                    <div class="metric-value2">{(a_home_win / len(away_matches)) * 100:.0f}%</div>
-                </div>
-                <div>
-                    <div class="metric-sub">Goals: {a_home_goal}<br>Moy. {(a_home_goal / len(away_matches)):.2f}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col1, col2,col3,col4,col5,col6= st.columns([2,1,1,1,1,2])
-        col2.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(btts_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">BTTS</div>
-                    <div class="metric-value2">{btts_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col3.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage((1-btts_pct) * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">OTS</div>
-                    <div class="metric-value2">{(1 - btts_pct)* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col4.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Over 1,5</div>
-                    <div class="metric-value2">{over15_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        col5.markdown(
-            f"""
-            <div class="metric-container2" style="background-color: {get_color_from_percentage(over15_pct * 100)}">
-                <!-- Container with title and value in vertical alignment -->
-                <div class="metric-info">
-                    <div class="metric-title2">Over 2,5</div>
-                    <div class="metric-value2">{over25_pct* 100:.0f}%</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        
-
-        st.caption(get_legend_html(), unsafe_allow_html=True)
-        display_match_table(away_matches)
+        matches = [m for m in matches if is_away_match(m, home_team_name, away_team_name)]
+        display_data(matches,home_team_name,away_team_name,logo)
 
 def main():
     st.title("Head to Head Analysis")
     head_to_head_section()
+    
 
 if __name__ == "__main__":
     main()

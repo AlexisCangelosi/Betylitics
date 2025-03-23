@@ -262,6 +262,18 @@ def process_url(url, url_index, total, progress_bar=None):
     update_local(0.2, "Extracting team name from page")
     team = extract_team_name_from_soup(soup)
 
+    update_local(0.25, "Extracting team logo")
+    # NEW: Extract team logo URL from the meta section.
+    team_logo_url = None
+    meta_div = soup.find(id="meta")
+    if meta_div:
+        first_div = meta_div.find("div")
+        if first_div:
+            img_tag = first_div.find("img")
+            if img_tag and img_tag.get("src"):
+                team_logo_url = urllib.parse.urljoin(url, img_tag["src"])
+    
+
     update_local(0.3, "Parsing standard tables")
     standard_tables = soup.find_all("table", id=lambda x: x and x.startswith("stats_standard_"))
     standard_tables_data = [parse_table(table) for table in standard_tables]
@@ -292,7 +304,7 @@ def process_url(url, url_index, total, progress_bar=None):
     time.sleep(2)
     update_local(1.0, "URL processing complete")
     
-    return {"team": team, "tables": merged_tables, "venues": venues}
+    return {"team": team, "team_logo_url": team_logo_url, "tables": merged_tables, "venues": venues}
 
 def fetch_fbref_stats(urls, output_file="artifacts/fbref_stats.json"):
     """

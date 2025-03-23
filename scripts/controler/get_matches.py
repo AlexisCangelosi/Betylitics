@@ -191,19 +191,21 @@ def get_matches(date_str):
             # Récupérer le texte du span dans le h2 et le convertir en majuscules
             span_tag = h2.find("span")
             country_code = span_tag.get_text(strip=True).upper() if span_tag else ""
-            
+            # Récupérer le nom de la league depuis le lien du H2
             a_tag = h2.find("a")
             if a_tag and a_tag.has_attr("href"):
+                league_name = a_tag.get_text(strip=True)
                 match_href = f"https://fbref.com{a_tag['href']}"
                 if url_in_json(match_href, clubs_data):
                     table_html = extract_table_from_div(div)
                     if table_html:
                         table_data = parse_table_html(table_html)
-                        # Ajouter la valeur du pays dans chaque ligne
+                        # Ajouter le pays et la league à chaque ligne
                         for row in table_data:
                             row["Country"] = country_code
+                            row["CountryFlag"] = f"flag-{country_code.lower()}"
+                            row["League"] = league_name
                         all_rows.extend(table_data)
-
     
     # 5. Enregistrer le résultat dans fbref_matches.json (liste plate de dictionnaires)
     output_path = "artifacts/fbref_matches.json"
