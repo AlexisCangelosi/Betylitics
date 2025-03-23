@@ -298,7 +298,7 @@ with st.sidebar:
         reset_json_files()
     # Assume this timestamp is when your data was last updated.
     # For example, here we simulate it with a timestamp from one hour ago.
-    last_updated_str = "2025-03-23 02:07"  # Replace this with your actual update time
+    last_updated_str = "2025-03-23 03:48"  # Replace this with your actual update time
     # For demonstration, we subtract 1 hour:
     last_updated = datetime.strptime(last_updated_str, "%Y-%m-%d %H:%M")
 
@@ -314,7 +314,7 @@ with st.sidebar:
     else:
         update_message = f"🗘 {minutes_ago} minute{'s' if minutes_ago > 1 else ''} ago"
 
-    st.caption(f"⚙️ v1.0.0-20250323.2870 - {update_message}")
+    st.caption(f"⚙️ v1.0.0-20250323.31bc - {update_message}")
 
 # --- Menu principal via option_menu ---
 # Recharger les infos après analyse (vous pouvez déclencher ce rechargement via une condition ou un bouton)
@@ -349,6 +349,6 @@ selected_main = option_menu(
 if selected_main == "H2H":
     head_to_head_section()
 elif selected_main == "Statistics":
-    display_statistics()
+    display_statistics(logo)
 elif selected_main == "Facts":
     st.write("Autres faits et informations.")

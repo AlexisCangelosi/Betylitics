@@ -76,7 +76,7 @@ def style_streaks(row):
     if the value is nonzero, the cell is styled in red.
     For all other metrics, if the numeric value is greater than 1, the cell is styled in green.
     """
-    red_metrics = {"Consecutive defeats", "No win", "1 goal conceded or more", "No goal scored"}
+    red_metrics = {"Consecutive defeats", "No win", "1 goal conceded or more", "No goal scored","Consecutive defeats or draw"}
     styles = {}
     for col, val in row.items():
         try:
@@ -96,78 +96,32 @@ def style_streaks(row):
             styles[col] = ""
     return pd.Series(styles)
 
-def display_team_summary(datasets: list):
+# --- Modified display_team_summary Function ---
+def display_team_summary(datasets: list, logo):
     """
-    Displays the "Summary" view for a team with dynamic filtering and calculations.
+    Displays the "Form" or "Streak" view for all teams.
+    Instead of a team selection pill, the function iterates through every team in the datasets,
+    computes their statistics, and displays a combined table with the team name as the first column.
+
+    The "Combined Match Table" is now shown in 2 columns (one per team) with un filtre Home vs Away.
+    Si l'utilisateur sélectionne "Home vs Away" :
+      - La team 1 affiche ses matchs à domicile ("Domicile")
+      - La team 2 affiche ses matchs à l'extérieur ("Extérieur")
+    Inversement pour "Away vs Home".
+    """
+    # --- Global Dynamic Filter Selections (applied to all teams) ---
+    # Build competition options by merging competitions from all datasets
+    all_comp_options = set()
+    for ds in datasets:
+        venues = ds.get("venues", {}).get("venues", [])
+        if venues:
+            df_temp = pd.DataFrame(venues)
+            if "Comp" in df_temp.columns:
+                all_comp_options.update(df_temp["Comp"].dropna().unique().tolist())
+    comp_options = ["All"] + sorted(list(all_comp_options))
     
-    The function:
-      1. Sorts the venues data by date (descending) and filters out future/incomplete matches.
-      2. Provides dynamic st.pills (on a single row) for:
-         - Competition selection (with an "All" option),
-         - Match type selection (Overall, Home, Away),
-         - Table selection ("Form" or "Streak").
-      3. Uses a select slider for match count selection (options: "3", "5", "6", "10", "15", "20").
-      4. Calculates key "Form" statistics and displays them if "Form" is selected.
-      5. Computes streak metrics and displays them if "Streak" is selected.
-      6. Always displays the filtered match table (df_to_display) with conditional row coloring.
-    """
-    # Extract team names from datasets
-    team_names = [extract_team_name(ds.get("team", "Unknown")) for ds in datasets]
-    # Display team selection pills
-    selected_team = st.pills(
-        "Select Team",
-        options=team_names,
-        selection_mode="single",
-        default=team_names[0],
-        key="team_selection",
-        label_visibility="collapsed"
-    )
-    # Find the dataset corresponding to the selected team
-    selected_index = team_names.index(selected_team)
-    team_data = datasets[selected_index]
-
-    # Retrieve 'venues' data from the team dataset
-    venues_obj = team_data.get("venues", {})
-    if not venues_obj:
-        st.info("No 'venues' object found in this dataset.")
-        return
-
-    venues_list = venues_obj.get("venues", [])
-    if not venues_list:
-        st.info("No venues data found under 'venues' key.")
-        return
-
-    # Convert venues data to DataFrame
-    df_summary = pd.DataFrame(venues_list)
-    if "Date" not in df_summary.columns:
-        st.info("No 'Date' column found in the venues data.")
-        st.dataframe(df_summary)
-        return
-
-    # Convert 'Date' column to datetime and sort descending (most recent first)
-    df_summary["Date_parsed"] = pd.to_datetime(df_summary["Date"], errors="coerce")
-    df_summary = df_summary.sort_values("Date_parsed", ascending=False).reset_index(drop=True)
-
-    # Filter out matches that have not been played (Résultat must be V, D, or N)
-    if "Résultat" in df_summary.columns:
-        df_summary = df_summary[df_summary["Résultat"].isin(["V", "D", "N"])]
-    else:
-        st.warning("No 'Résultat' column found. Unable to filter out future matches.")
-
-    # Ensure numeric columns are parsed properly
-    for col in ["BM", "BE"]:
-        if col in df_summary.columns:
-            df_summary[col] = df_summary[col].apply(extract_main_value)
-
-    # --- Dynamic Pill Selections on a Single Row ---
-    if "Comp" in df_summary.columns and not df_summary.empty:
-        comp_values = df_summary["Comp"].dropna().unique().tolist()
-        comp_values = sorted(comp_values)
-        comp_options = ["All"] + comp_values
-    else:
-        comp_options = ["All"]
-
-    match_type_options = ["Overall", "Home", "Away"]
+    # Mise à jour des options de match_type
+    match_type_options = ["Overall", "Home vs Away", "Away vs Home"]
     table_options = ["Form", "Streak"]
 
     col_comp, col_type, col_count, col_table = st.columns([4, 2.5, 4, 2.5])
@@ -177,7 +131,7 @@ def display_team_summary(datasets: list):
             comp_options,
             selection_mode="single",
             default="All",
-            key=f"comp_pills"
+            key="comp_pills"
         )
     with col_type:
         selected_type = st.pills(
@@ -185,15 +139,14 @@ def display_team_summary(datasets: list):
             match_type_options,
             selection_mode="single",
             default="Overall",
-            key=f"match_type_pills"
+            key="match_type_pills"
         )
     with col_count:
-        # Replace the pill with a select slider for match count
         matches_count = st.select_slider(
             "Select number of matches",
             options=["3", "5", "6", "10", "15", "20"],
             value="10",
-            key=f"match_count_slider"
+            key="match_count_slider"
         )
     with col_table:
         selected_table = st.pills(
@@ -201,65 +154,103 @@ def display_team_summary(datasets: list):
             table_options,
             selection_mode="single",
             default="Form",
-            key=f"table_pills"
+            key="table_pills"
         )
-
-    if selected_comp != "All":
-        df_summary = df_summary[df_summary["Comp"] == selected_comp]
-
-    if selected_type != "Overall" and "Tribune" in df_summary.columns:
-        if selected_type == "Home":
-            df_summary = df_summary[df_summary["Tribune"] == "Domicile"]
-        elif selected_type == "Away":
-            df_summary = df_summary[df_summary["Tribune"] == "Extérieur"]
-
-    # Convert the slider selection to integer
     count_to_take = int(matches_count)
-    df_filtered = df_summary.head(count_to_take)
+    
+    # --- Prepare Data for Combined Tables ---
+    form_rows = []   # List to hold form statistics rows for each team
+    streak_rows = [] # List to hold streak statistics rows for each team
+    
+    # We will also keep track of each team's filtered match data
+    results_by_team = {}
 
-    # --- Calculations for Form View ---
-    num_matches = len(df_filtered)
-    wins = sum(df_filtered["Résultat"] == "V") if "Résultat" in df_filtered.columns else 0
-    draws = sum(df_filtered["Résultat"] == "N") if "Résultat" in df_filtered.columns else 0
-    losses = sum(df_filtered["Résultat"] == "D") if "Résultat" in df_filtered.columns else 0
+    # Process each team dataset with index (to appliquer le filtre home vs away)
+    for idx, ds in enumerate(datasets):
+        team_name = extract_team_name(ds.get("team", "Unknown"))
+        venues_obj = ds.get("venues", {})
+        venues_list = venues_obj.get("venues", [])
+        if not venues_list:
+            continue
+        df_summary = pd.DataFrame(venues_list)
+        
+        # Sort & filter out unplayed matches
+        if "Date" in df_summary.columns:
+            df_summary["Date_parsed"] = pd.to_datetime(df_summary["Date"], errors="coerce")
+            df_summary = df_summary.sort_values("Date_parsed", ascending=False).reset_index(drop=True)
+        if "Résultat" in df_summary.columns:
+            df_summary = df_summary[df_summary["Résultat"].isin(["V", "D", "N"])]
+        
+        # Ensure numeric columns are parsed properly
+        for col in ["BM", "BE"]:
+            if col in df_summary.columns:
+                df_summary[col] = df_summary[col].apply(extract_main_value)
+        
+        # --- Apply Global Filters ---
+        if selected_comp != "All" and "Comp" in df_summary.columns:
+            df_summary = df_summary[df_summary["Comp"] == selected_comp]
+        if selected_type != "Overall" and "Tribune" in df_summary.columns:
+            if selected_type == "Home vs Away":
+                # Pour Home vs Away: team 1 affiche "Domicile", team 2 affiche "Extérieur"
+                if idx == 0:
+                    df_summary = df_summary[df_summary["Tribune"] == "Domicile"]
+                elif idx == 1:
+                    df_summary = df_summary[df_summary["Tribune"] == "Extérieur"]
+            elif selected_type == "Away vs Home":
+                # Pour Away vs Home: team 1 affiche "Extérieur", team 2 affiche "Domicile"
+                if idx == 0:
+                    df_summary = df_summary[df_summary["Tribune"] == "Extérieur"]
+                elif idx == 1:
+                    df_summary = df_summary[df_summary["Tribune"] == "Domicile"]
+        # Keep only the latest N matches
+        df_filtered = df_summary.head(count_to_take)
+        
+        # Save the filtered DataFrame for the results table
+        results_by_team[team_name] = df_filtered
 
-    goals_scored = df_filtered["BM"].sum() if "BM" in df_filtered.columns else 0
-    goals_conceded = df_filtered["BE"].sum() if "BE" in df_filtered.columns else 0
-    goal_diff = goals_scored - goals_conceded
-    points = wins * 3 + draws
+        # --- Calculate Form Statistics for the Team ---
+        num_matches = len(df_filtered)
+        wins = sum(df_filtered["Résultat"] == "V") if "Résultat" in df_filtered.columns else 0
+        draws = sum(df_filtered["Résultat"] == "N") if "Résultat" in df_filtered.columns else 0
+        losses = sum(df_filtered["Résultat"] == "D") if "Résultat" in df_filtered.columns else 0
 
-    df_for_chart = df_filtered.head(5)
-    results_emoji = []
-    if "Résultat" in df_for_chart.columns:
-        for res in df_for_chart["Résultat"]:
-            if res == "V":
-                results_emoji.append("🟢")
-            elif res == "D":
-                results_emoji.append("🔴")
-            elif res == "N":
-                results_emoji.append("🟡")
-            else:
-                results_emoji.append("⚪")
-    else:
-        results_emoji = ["⚪"] * len(df_for_chart)
-    emoji_str = " ".join(results_emoji)
-    stats_data = {
-        "Matches Played": [num_matches],
-        "Wins": [wins],
-        "Draws": [draws],
-        "Losses": [losses],
-        "Goals Scored": [goals_scored],
-        "Goals Conceded": [goals_conceded],
-        "Goal Diff": [goal_diff],
-        "Points": [points],
-        "Last 5": [emoji_str]
-    }
-    stats_df = pd.DataFrame(stats_data)
+        goals_scored = df_filtered["BM"].sum() if "BM" in df_filtered.columns else 0
+        goals_conceded = df_filtered["BE"].sum() if "BE" in df_filtered.columns else 0
+        goal_diff = goals_scored - goals_conceded
+        points = wins * 3 + draws
 
-    # --- Display the Form/Stats Table Based on Selected Table Pill ---
-    if selected_table == "Form":
-        st.dataframe(stats_df, hide_index=True)
-    elif selected_table == "Streak":
+        # Get last 5 match results as emoji
+        df_for_chart = df_filtered.head(5)
+        results_emoji = []
+        if "Résultat" in df_for_chart.columns:
+            for res in df_for_chart["Résultat"]:
+                if res == "V":
+                    results_emoji.append("🟢")
+                elif res == "D":
+                    results_emoji.append("🔴")
+                elif res == "N":
+                    results_emoji.append("🟡")
+                else:
+                    results_emoji.append("⚪")
+        else:
+            results_emoji = ["⚪"] * len(df_for_chart)
+        emoji_str = " ".join(results_emoji)
+        
+        form_row = {
+            "Team": team_name,
+            "Matches Played": num_matches,
+            "Wins": wins,
+            "Draws": draws,
+            "Losses": losses,
+            "Goals Scored": goals_scored,
+            "Goals Conceded": goals_conceded,
+            "Goal Diff": goal_diff,
+            "Points": points,
+            "Last 5": emoji_str
+        }
+        form_rows.append(form_row)
+        
+        # --- Calculate Streak Metrics for the Team ---
         if not df_filtered.empty:
             results = df_filtered["Résultat"].tolist() if "Résultat" in df_filtered.columns else []
             streak_consecutive_wins = current_streak(results, lambda x: x == "V")
@@ -270,18 +261,21 @@ def display_team_summary(datasets: list):
             streak_no_win = current_streak(results, lambda x: x != "V")
             streak_no_draw = current_streak(results, lambda x: x != "N")
             streak_no_defeat = current_streak(results, lambda x: x != "D")
+            
             if "BM" in df_filtered.columns:
                 bm_series = df_filtered["BM"].tolist()
                 streak_1_goal_scored_or_more = current_streak(bm_series, lambda x: x >= 1)
                 streak_no_goal_scored = current_streak(bm_series, lambda x: x == 0)
             else:
                 streak_1_goal_scored_or_more = streak_no_goal_scored = 0
+
             if "BE" in df_filtered.columns:
                 be_series = df_filtered["BE"].tolist()
                 streak_1_goal_conceded_or_more = current_streak(be_series, lambda x: x >= 1)
                 streak_no_goal_conceded = current_streak(be_series, lambda x: x == 0)
             else:
                 streak_1_goal_conceded_or_more = streak_no_goal_conceded = 0
+
             if "BM" in df_filtered.columns and "BE" in df_filtered.columns:
                 total_series = df_filtered.apply(lambda row: row["BM"] + row["BE"], axis=1).tolist()
                 streak_GF_GA_over_2_5 = current_streak(total_series, lambda x: x >= 3)
@@ -289,7 +283,8 @@ def display_team_summary(datasets: list):
             else:
                 streak_GF_GA_over_2_5 = streak_GF_GA_under_2_5 = 0
 
-            streaks = {
+            streaks_dict = {
+                "Team": team_name,
                 "Consecutive wins": streak_consecutive_wins if streak_consecutive_wins > 0 else "",
                 "Consecutive wins or draw": streak_consecutive_win_or_draw if streak_consecutive_win_or_draw > 0 else "",
                 "Consecutive draws": streak_consecutive_draws if streak_consecutive_draws > 0 else "",
@@ -305,35 +300,103 @@ def display_team_summary(datasets: list):
                 "GF+GA over 2.5": streak_GF_GA_over_2_5 if streak_GF_GA_over_2_5 > 0 else "",
                 "GF+GA under 2.5": streak_GF_GA_under_2_5 if streak_GF_GA_under_2_5 > 0 else ""
             }
-            filtered_streaks = {k: v for k, v in streaks.items() if v != ""}
-            if filtered_streaks:
-                streaks_df = pd.DataFrame([filtered_streaks])
-                st.subheader("Streak Metrics")
-                st.dataframe(streaks_df.style.apply(style_streaks, axis=1), hide_index=True)
-            else:
-                st.info("No non-zero streaks to display.")
+            # Only keep non-zero streaks (with value > 1) besides the team name
+            streaks_data = {k: v for k, v in streaks_dict.items() if k == "Team" or (v != "" and int(v) > 1)}
+            streak_rows.append(streaks_data)
         else:
-            st.info("No matches available for streak analysis.")
+            streak_rows.append({"Team": team_name})
+    
+    # --- Display the Combined Tables (Form / Streak) ---
+    if selected_table == "Form":
+        stats_df = pd.DataFrame(form_rows)
+        st.dataframe(stats_df, hide_index=True)
 
-    # --- Always display the filtered match table ---
+    elif selected_table == "Streak":
+        if streak_rows:
+            streaks_df = pd.DataFrame(streak_rows)
+
+            # Convert numeric streak columns to integer strings (no decimals)
+            def format_streak_values(val):
+                try:
+                    return str(int(float(val)))
+                except (ValueError, TypeError):
+                    return val
+
+            streaks_df = streaks_df.apply(lambda col: col.map(format_streak_values))
+            st.dataframe(streaks_df.style.apply(style_streaks, axis=1), hide_index=True)
+        else:
+            st.info("No non-zero streaks to display.")
+    
+    # --- Display Combined Match Table in Two Columns (one for each team) ---
+    # Filters are already applied; we just display the results side by side.
     display_mode = st.pills(
         "Display Mode",
         options=["Default", "Wide"],
         selection_mode="single",
         default="Default",
-        key=f"display_mode",
-        label_visibility="collapsed"
+        key="display_mode"
     )
-    if display_mode != "Wide":
-        columns_to_show = ["Date", "Comp", "Tour", "Résultat", "BM", "BE", "Adversaire"]
-        df_to_display = df_filtered[[col for col in columns_to_show if col in df_filtered.columns]]
-    else:
-        df_to_display = df_filtered.drop(columns=["Date_parsed"], errors="ignore")
-    if not df_to_display.empty:
-        st.dataframe(df_to_display.style.apply(highlight_result, axis=1), hide_index=True)
-    else:
-        st.info("No matches available after filtering.")
 
+    teams_sorted = list(results_by_team.keys())
+    if len(teams_sorted) == 2:
+        col1, col2 = st.columns(2)
+
+        # Left column: first team
+        with col1:
+            team_1 = teams_sorted[0]
+            st.markdown(rf"""
+<div style="font-size: 20px;">
+    <img src="{logo[0]}" alt="Team Logo" style="width:40px; height:40px; border-radius:10%;padding-bottom: 2px">
+    {team_1}
+</div>
+""", unsafe_allow_html=True)
+            df_team_1 = results_by_team[team_1].copy()
+            if not df_team_1.empty:
+                if display_mode != "Wide":
+                    columns_to_show = ["Date", "Comp", "Tour", "Résultat", "BM", "BE", "Adversaire"]
+                    columns_to_show = [c for c in columns_to_show if c in df_team_1.columns]
+                    df_team_1 = df_team_1[columns_to_show]
+                else:
+                    df_team_1 = df_team_1.drop(columns=["Date_parsed"], errors="ignore")
+                st.dataframe(df_team_1.style.apply(highlight_result, axis=1), hide_index=True)
+            else:
+                st.info(f"No matches available for {team_1} after filtering.")
+
+        # Right column: second team
+        with col2:
+            team_2 = teams_sorted[1]
+            st.markdown(rf"""
+<div style="font-size: 20px;">
+    <img src="{logo[1]}" alt="Team Logo" style="width:40px; height:40px; border-radius:10px;padding-bottom: 2px">
+    {team_2}
+</div>
+""", unsafe_allow_html=True)
+            df_team_2 = results_by_team[team_2].copy()
+            if not df_team_2.empty:
+                if display_mode != "Wide":
+                    columns_to_show = ["Date", "Comp", "Tour", "Résultat", "BM", "BE", "Adversaire"]
+                    columns_to_show = [c for c in columns_to_show if c in df_team_2.columns]
+                    df_team_2 = df_team_2[columns_to_show]
+                else:
+                    df_team_2 = df_team_2.drop(columns=["Date_parsed"], errors="ignore")
+                st.dataframe(df_team_2.style.apply(highlight_result, axis=1), hide_index=True)
+            else:
+                st.info(f"No matches available for {team_2} after filtering.")
+
+    else:
+        for team_name in teams_sorted:
+            st.subheader(team_name)
+            df_team = results_by_team[team_name].copy()
+            if not df_team.empty:
+                if display_mode != "Wide":
+                    columns_to_show = ["Date", "Comp", "Tour", "Résultat", "BM", "BE", "Adversaire"]
+                    columns_to_show = [c for c in columns_to_show if c in df_team.columns]
+                    df_team = df_team[columns_to_show]
+                else:
+                    df_team = df_team.drop(columns=["Date_parsed"], errors="ignore")
+                st.dataframe(df_team.style.apply(highlight_result, axis=1), hide_index=True)
+            else:
+                st.info(f"No matches available for {team_name} after filtering.")
 
 def display_team_stats(team_data: dict):
     """
@@ -348,8 +411,7 @@ def display_player_stats(team_data: dict):
     st.subheader("Player Statistics In progress...")
 
 # --- Main Function to Render Statistics ---
-
-def display_statistics():
+def display_statistics(logo):
     """
     Loads JSON data from fbref_stats.json, extracts team information,
     and renders an interactive UI with sub-view pills for "Form & Streak",
@@ -378,16 +440,16 @@ def display_statistics():
     )
 
     if selected_sub_view == "Form & Streak":
-        display_team_summary(datasets)
+        display_team_summary(datasets, logo)
     elif selected_sub_view == "Team Statistics":
-        display_team_stats(datasets[0])  # You may modify this as needed
+        display_team_stats(datasets[0])
     elif selected_sub_view == "Player Statistics":
         display_player_stats(datasets[0])
 
-
 # --- Main Execution ---
-
 if __name__ == "__main__":
     st.title("Football Statistics")
     st.write("View team or player statistics based on the loaded dataset.")
-    display_statistics()
+    # Par exemple, on suppose que logo est une liste contenant les URLs des logos pour chaque équipe
+    logo = ["https://example.com/logo1.png", "https://example.com/logo2.png"]
+    display_statistics(logo)
